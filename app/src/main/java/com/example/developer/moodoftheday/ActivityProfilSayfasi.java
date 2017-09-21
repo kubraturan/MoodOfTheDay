@@ -96,11 +96,12 @@ public class ActivityProfilSayfasi extends AppCompatActivity {
 
         dbref = FirebaseDatabase.getInstance().getReference("kullaniciModlari").child(gelecekOlanKisi);
         refKisiFoto = FirebaseDatabase.getInstance().getReference("users").child(gelecekOlanKisi);
-
         profilResmi = (ImageView) findViewById(R.id.profilResmi);
-         isim=(TextView) findViewById(R.id.AdSoyad) ;
+        isim=(TextView) findViewById(R.id.AdSoyad) ;
         memleket=(TextView) findViewById(R.id.memleket );
         yas=(TextView) findViewById(R.id.yas);
+
+
 
         refKisiFoto.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -268,7 +269,7 @@ public class ActivityProfilSayfasi extends AppCompatActivity {
                 public void onItemClick(View v, int position) {
 
                 }
-            });
+            },refKisiFoto.getKey());
                 recycler_view.setLayoutManager(layoutManager);
 
                 recycler_view.setHasFixedSize(true);

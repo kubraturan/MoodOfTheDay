@@ -52,11 +52,15 @@ public class Kaydol extends AppCompatActivity implements  Validator.ValidationLi
     Validator validator;
     boolean controlpoint=false;
     DatabaseReference users = FirebaseDatabase.getInstance().getReference("users");
+    DatabaseReference arkListesi=FirebaseDatabase.getInstance().getReference("ArkadasListesi");
 
     public String username;
     public String Password;
     public String Email;
     public String KullaniciAdi;
+    String kisiResmi="2130837591";
+    String id="78324623864823";
+    String profilGizlilik="Herkese Açık";
     List<Kisiler> person=new ArrayList<>();
 
     @Override
@@ -84,7 +88,8 @@ public class Kaydol extends AppCompatActivity implements  Validator.ValidationLi
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 FirebaseAuth.getInstance().getCurrentUser();
-                                users.child(task.getResult().getUser().getUid()).setValue(new Kisiler(username, KullaniciAdi, Email, Password));
+                                users.child(task.getResult().getUser().getUid()).setValue(new Kisiler(id,username, KullaniciAdi, Email, Password,kisiResmi,profilGizlilik));
+                                arkListesi.child(task.getResult().getUser().getUid()).setValue("");
                                 Toast.makeText(Kaydol.this, "Kayıt Başarılı", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(Kaydol.this, ActivityGirisSayfasi.class);
                                 startActivity(intent);
