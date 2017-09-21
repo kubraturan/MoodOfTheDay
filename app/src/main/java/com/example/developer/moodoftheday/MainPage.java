@@ -5,6 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,31 +23,115 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 //TODO: kişilerin postunun nerden alınacağını sor
 public class MainPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    private ArrayList<Post> posts = new ArrayList<Post>();
-    private  MainPageAdapter adapter;
-    DatabaseReference kisiRef;
+    public ArrayList<Post> posts = new ArrayList<Post>();
+    List<String> arkadaslar=new ArrayList<String>();
+    public  MainPageAdapter adapter;
+    modumProfil customer;
+    DatabaseReference kisiRef,kisiArkadas;
     String alınan;
+    List<modumProfil> liste=new ArrayList<modumProfil>();
+    DatabaseReference dbref;
+    private RecyclerView recycler_view;
+    FirebaseUser user;
+
+    int t;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Intent alındı = getIntent();
-        alınan = alındı.getExtras().getString("gelecekOlanKisi");
-        kisiRef=FirebaseDatabase.getInstance().getReference("users");
 
+
+        user= FirebaseAuth.getInstance().getCurrentUser();
+        alınan=user.getUid();
+        kisiRef=FirebaseDatabase.getInstance().getReference("users");
+        kisiArkadas=FirebaseDatabase.getInstance().getReference("ArkadasListesi").child(alınan);
+        recycler_view = (RecyclerView)findViewById(R.id.RecyclePost);
+        arkadaslar.clear();
+        liste.clear();
+
+        kisiArkadas.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot obj:dataSnapshot.getChildren()){
+                    arkadaslar.add(obj.getKey());
+
+
+                }
+              for( int i=0;i<arkadaslar.size();i++){
+                    dbref = FirebaseDatabase.getInstance().getReference("kullaniciModlari").child(arkadaslar.get(i));
+                     t=i;
+                    dbref.addValueEventListener(new ValueEventListener() {
+
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapsho) {
+                            for (DataSnapshot postSnapshot : dataSnapsho.getChildren()) {
+                                 customer = postSnapshot.getValue(modumProfil.class);
+                                liste.add(customer);
+
+                            }
+
+                            LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+                            layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+                            layoutManager.scrollToPosition(0);
+                            profilModAdapterr adapter_items = new profilModAdapterr(arkadaslar.get(t),liste,getApplicationContext(),new CustomItemClickListener(){
+                                @Override
+                                public void onItemClick(View v, int position) {
+
+                                }
+
+
+                            });
+                            Collections.reverse(liste);
+
+                            recycler_view.setLayoutManager(layoutManager);
+
+                            recycler_view.setHasFixedSize(true);
+
+                            recycler_view.setAdapter(adapter_items);
+
+                            recycler_view.setItemAnimator(new DefaultItemAnimator());
+
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
+                }
+
+            }
+
+
+
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+
+/*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,7 +140,7 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
                         .setAction("Action", null).show();
             }
         });
-
+*/
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -108,6 +196,8 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
         getMenuInflater().inflate(R.menu.main_page, menu);
         return true;
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

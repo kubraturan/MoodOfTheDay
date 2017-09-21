@@ -14,9 +14,8 @@ public class Kisiler {
     String email;
     String password;
     String profilGizlilik;
+
     String kisiResmi;
-    String memleket;
-    String dogumTarihi;
 
 
 
@@ -33,6 +32,12 @@ public class Kisiler {
     }
 
 
+    public Kisiler(String name, String kullaniciadi, String email, String password) {
+        this.name = name;
+        this.kullaniciadi = kullaniciadi;
+        this.email = email;
+        this.password = password;
+    }
 
     public Kisiler(String id, String name, String kisiResmi) {
         this.id = id;
@@ -124,21 +129,5 @@ public class Kisiler {
 
     public void setKisiResmi(String kisiResmi) {
         this.kisiResmi = kisiResmi;
-    }
-
-    public String getMemleket() {
-        return memleket;
-    }
-
-    public void setMemleket(String memleket) {
-        this.memleket = memleket;
-    }
-
-    public String getDogumTarihi() {
-        return dogumTarihi;
-    }
-
-    public void setDogumTarihi(String dogumTarihi) {
-        this.dogumTarihi = dogumTarihi;
     }
 }
