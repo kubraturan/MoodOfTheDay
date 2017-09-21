@@ -72,7 +72,7 @@ public class ActivityProfilSayfasi extends AppCompatActivity {
     Kisiler kisi=new Kisiler();
     Menu menumuz;
     StorageReference storageReference,profResIcin;
-    ImageView arkadasListesi,profilResmi;
+    ImageView arkadasListesi,profilResmi,mainPage;
     FloatingActionButton gizlilikAyarlari;
     String currentPhotoPath;
     private RecyclerView recycler_view;
@@ -97,6 +97,7 @@ public class ActivityProfilSayfasi extends AppCompatActivity {
         dbref = FirebaseDatabase.getInstance().getReference("kullaniciModlari").child(gelecekOlanKisi);
         refKisiFoto = FirebaseDatabase.getInstance().getReference("users").child(gelecekOlanKisi);
         profilResmi = (ImageView) findViewById(R.id.profilResmi);
+        mainPage=(ImageView) findViewById(R.id.mainpage);
         isim=(TextView) findViewById(R.id.AdSoyad) ;
         memleket=(TextView) findViewById(R.id.memleket );
         yas=(TextView) findViewById(R.id.yas);
@@ -142,7 +143,13 @@ public class ActivityProfilSayfasi extends AppCompatActivity {
 
 
 
-
+        mainPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(ActivityProfilSayfasi.this,MainPage.class);
+                startActivity(intent);
+            }
+        });
 
         profilResmi.setOnClickListener(new View.OnClickListener() {
 
@@ -167,7 +174,7 @@ public class ActivityProfilSayfasi extends AppCompatActivity {
                             }
                         });
 
-                secimDialog.setNegativeButton("Profil Resmini Değiştir",
+                                secimDialog.setNegativeButton("Profil Resmini Değiştir",
                         new DialogInterface.OnClickListener() {
 
                             public void onClick(DialogInterface dialog, int which) {
@@ -218,7 +225,6 @@ public class ActivityProfilSayfasi extends AppCompatActivity {
                 AlertDialog.Builder modDialog = new AlertDialog.Builder(ActivityProfilSayfasi.this);
                 modDialog.setTitle("Modun ne olsun istersin ?");
                 modDialog.setIcon(R.drawable.fotogalerii); //İkonun projedeki konumu set edelir.
-
                 modDialog.setPositiveButton("Modum Değişti ",
                         new DialogInterface.OnClickListener() {
 
@@ -264,12 +270,12 @@ public class ActivityProfilSayfasi extends AppCompatActivity {
                 LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
                 layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                 layoutManager.scrollToPosition(0);
-                profilModAdapterr adapter_items = new profilModAdapterr(liste,getApplicationContext(),new CustomItemClickListener(){
+                profilModAdapterr adapter_items = new profilModAdapterr(dbref.getKey(),liste,getApplicationContext(),new CustomItemClickListener(){
                 @Override
                 public void onItemClick(View v, int position) {
 
                 }
-            },refKisiFoto.getKey());
+            });
                 recycler_view.setLayoutManager(layoutManager);
 
                 recycler_view.setHasFixedSize(true);
@@ -303,9 +309,7 @@ public class ActivityProfilSayfasi extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 android.widget.PopupMenu popup = new android.widget.PopupMenu(ActivityProfilSayfasi.this, gizlilikAyarlari);
-
                 popup.getMenuInflater().inflate(R.menu.gizlilikmenu, popup.getMenu());
-
                 popup.setOnMenuItemClickListener(new android.widget.PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {

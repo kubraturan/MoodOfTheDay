@@ -47,7 +47,8 @@ public class profilModAdapterr extends RecyclerView.Adapter<profilModAdapterr.Vi
     PopupMenu popup;
     DatabaseReference  refKisiBil;
     FirebaseAuth firebaseAuth;
-   String user;
+    String user;
+
 
 
 
@@ -91,7 +92,7 @@ public class profilModAdapterr extends RecyclerView.Adapter<profilModAdapterr.Vi
 
     }}
 
-    public profilModAdapterr( List<modumProfil> modDurumlarıList,Context activity,CustomItemClickListener listener,String user) {
+    public profilModAdapterr(String user, List<modumProfil> modDurumlarıList,Context activity,CustomItemClickListener listener) {
         this.modDurumlarıList = modDurumlarıList;
         this.user=user;
         this.context=activity;
@@ -120,6 +121,7 @@ public class profilModAdapterr extends RecyclerView.Adapter<profilModAdapterr.Vi
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         //user=FirebaseAuth.getInstance().getCurrentUser();
+        //user=modDurumlarıList.get(position).getId();
         refKisiBil=FirebaseDatabase.getInstance().getReference("users");
       //  refKisiBil.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
         refKisiBil.child(user).addListenerForSingleValueEvent(new ValueEventListener() {

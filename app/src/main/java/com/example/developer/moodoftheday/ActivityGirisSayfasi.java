@@ -60,9 +60,9 @@ public class ActivityGirisSayfasi extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_giris_sayfasi);
 
-            dbreference= FirebaseDatabase.getInstance().getReference("users");
+        dbreference= FirebaseDatabase.getInstance().getReference("users");
         mAuth = FirebaseAuth.getInstance();// getInstance() metoduyla da bu sınıfın referans olduğu nesneleri kullanabilmekteyiz.
-      mAuthListener = new FirebaseAuth.AuthStateListener() {//login olup olmadığımızı sürekli dinleyecek
+        mAuthListener = new FirebaseAuth.AuthStateListener() {//login olup olmadığımızı sürekli dinleyecek
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser  user = firebaseAuth.getCurrentUser();//get current user ile oturum açmış kullanıcıya erişin

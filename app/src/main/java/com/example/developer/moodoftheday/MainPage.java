@@ -30,7 +30,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -38,16 +37,16 @@ import java.util.List;
 //TODO: kişilerin postunun nerden alınacağını sor
 public class MainPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     public ArrayList<Post> posts = new ArrayList<Post>();
-      List<String> arkadaslar=new ArrayList<String>();
+    List<String> arkadaslar=new ArrayList<String>();
     public  MainPageAdapter adapter;
+    modumProfil customer;
     DatabaseReference kisiRef,kisiArkadas;
-    String keys;
     String alınan;
     List<modumProfil> liste=new ArrayList<modumProfil>();
-    ImageView arkadasListesi,profilResmi;
-    DatabaseReference dbref,refKisiId;
+    DatabaseReference dbref;
     private RecyclerView recycler_view;
     FirebaseUser user;
+
     int t;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,18 +54,16 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
         setContentView(R.layout.activity_main_page);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Intent alındı = getIntent();
-        alınan = alındı.getExtras().getString("gelecekOlanKisi");
+
+
         user= FirebaseAuth.getInstance().getCurrentUser();
+        alınan=user.getUid();
         kisiRef=FirebaseDatabase.getInstance().getReference("users");
         kisiArkadas=FirebaseDatabase.getInstance().getReference("ArkadasListesi").child(alınan);
         recycler_view = (RecyclerView)findViewById(R.id.RecyclePost);
         arkadaslar.clear();
         liste.clear();
 
-       // Log.d("deneme", String.valueOf(kisiArkadas));
-        //Log.d("deneme", String.valueOf(kisiArkadas.child(user.getUid())));
-        //Log.d("deneme", String.valueOf(kisiArkadas.child(user.getUid()).child()));
         kisiArkadas.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -75,35 +72,30 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
 
 
                 }
-                Toast.makeText(MainPage.this, ""+arkadaslar.size(), Toast.LENGTH_SHORT).show();
-
               for( int i=0;i<arkadaslar.size();i++){
                     dbref = FirebaseDatabase.getInstance().getReference("kullaniciModlari").child(arkadaslar.get(i));
-                  t=i;
+                     t=i;
                     dbref.addValueEventListener(new ValueEventListener() {
 
                         @Override
                         public void onDataChange(DataSnapshot dataSnapsho) {
                             for (DataSnapshot postSnapshot : dataSnapsho.getChildren()) {
-                                modumProfil customer = postSnapshot.getValue(modumProfil.class);
+                                 customer = postSnapshot.getValue(modumProfil.class);
                                 liste.add(customer);
-                                Collections.reverse(liste);
+
                             }
-
-
-
 
                             LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
                             layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                             layoutManager.scrollToPosition(0);
-                            profilModAdapterr adapter_items = new profilModAdapterr(liste,getApplicationContext(),new CustomItemClickListener(){
+                            profilModAdapterr adapter_items = new profilModAdapterr(arkadaslar.get(t),liste,getApplicationContext(),new CustomItemClickListener(){
                                 @Override
                                 public void onItemClick(View v, int position) {
 
                                 }
 
 
-                            },arkadaslar.get(t));
+                            });
                             Collections.reverse(liste);
 
                             recycler_view.setLayoutManager(layoutManager);
@@ -115,10 +107,6 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
                             recycler_view.setItemAnimator(new DefaultItemAnimator());
 
 
-//
-//                durumListesi = (ListView) findViewById(R.id.profildekiModlar);
-//                profilModAdapterr adapter = new profilModAdapterr(ActivityProfilSayfasi.this, liste);
-//                durumListesi.setAdapter(adapter);
                         }
 
                         @Override
