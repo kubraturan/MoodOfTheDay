@@ -38,6 +38,7 @@ public class ActivityGirisSayfasi extends AppCompatActivity {
     Button giris;
     //  ActivityProfilSayfasi gelecekolankisi=new ActivityProfilSayfasi();
     public DatabaseReference dbreference;
+    public DatabaseReference kisiRef;
     Kisiler kisi = new Kisiler();
     List<Kisiler> kisiler = new ArrayList<Kisiler>();
 
@@ -45,13 +46,28 @@ public class ActivityGirisSayfasi extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser  user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-            Intent fake=new Intent(ActivityGirisSayfasi.this,MainPage.class);
-            fake.putExtra("gelecekOlanKisi", user.getUid());
-            startActivity(fake);
-            finish();
-    }
+            // User is signed in
+            String id=user.getUid();
+            kisiRef=dbreference.child(id);
+            kisiRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    kullaniciAdi.setText(dataSnapshot.child("email").getValue().toString());
+                    sifre.setText(dataSnapshot.child("password").getValue().toString());
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+            //Log.d("Kontrol", "onAuthStateChanged:signed_in:" + user.getUid());
+
+
+        }
 
 }
 
@@ -69,10 +85,9 @@ public class ActivityGirisSayfasi extends AppCompatActivity {
                 if (user != null) {
                     // User is signed in
 
-                    Log.d("Kontrol", "onAuthStateChanged:signed_in:" + user.getUid());
-                    Intent fake=new Intent(ActivityGirisSayfasi.this,MainPage.class);
-                    fake.putExtra("fake","");
-                    startActivity(fake);
+                    //Log.d("Kontrol", "onAuthStateChanged:signed_in:" + user.getUid());
+                    kullaniciAdi.setText(user.getEmail());
+                    sifre.setText(dbreference.child(user.getUid()).child("password").getKey());
                 } else {
                     // User is signed out
                     Log.d("Kontrol", "onAuthStateChanged:signed_out");
@@ -110,12 +125,12 @@ public class ActivityGirisSayfasi extends AppCompatActivity {
                 mAuth.signInWithEmailAndPassword(kullaniciAdi.getText().toString().trim(), sifre.getText().toString().trim()).addOnCompleteListener(ActivityGirisSayfasi.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                     if( isConnected==true){
+                     if( isConnected){
                          if (task.isSuccessful()) {
 
                             ActivityProfilSayfasi.setAlınan(mAuth.getCurrentUser().getUid());
                             Intent intent = new Intent(ActivityGirisSayfasi.this, MainPage.class);
-                                            intent.putExtra("gelecekOlanKisi", mAuth.getCurrentUser().getUid());
+                                            //intent.putExtra("gelecekOlanKisi", mAuth.getCurrentUser().getUid());
                                             startActivity(intent);
                                             finish();
 
@@ -128,7 +143,7 @@ public class ActivityGirisSayfasi extends AppCompatActivity {
                              Toast.makeText(getApplicationContext(), "Kullanıcı Adı veya Şifre Hatalı  Tekrar Deneyin", Toast.LENGTH_SHORT).show();
 
                          }}
-                         else if(isConnected == false ){
+                         else if(!isConnected ){
 
                          Toast.makeText(getApplicationContext(), "Internet Bağlantınızı Kontrol Edin", Toast.LENGTH_SHORT).show();
 
