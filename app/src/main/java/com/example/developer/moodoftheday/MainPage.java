@@ -43,7 +43,7 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
         Intent alındı = getIntent();
         alınan = alındı.getExtras().getString("gelecekOlanKisi");
         kisiRef=FirebaseDatabase.getInstance().getReference("users");
-
+/*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,7 +52,7 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
                         .setAction("Action", null).show();
             }
         });
-
+*/
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
