@@ -1,0 +1,58 @@
+{
+  "project_info": {
+    "project_number": "788960959653",
+    "firebase_url": "https://modeoftheday-316d3.firebaseio.com",
+    "project_id": "modeoftheday-316d3",
+    "storage_bucket": "modeoftheday-316d3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:788960959653:android:f060b8faebb4a5dc",
+        "android_client_info": {
+          "package_name": "com.example.developer.moodoftheday"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "788960959653-5vcmrd1jqldkhb0j6011q5id8f9pimb4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.developer.moodoftheday",
+            "certificate_hash": "2300234a7d9fdce07ec9fa6b72e458f738a1ab56"
+          }
+        },
+        {
+          "client_id": "788960959653-hiukjn34sbiu25d6vncrv8eajop1149c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtylk6dnlEy9VcjzQpclkX4xBI4xVfdHQ"
+        },
+        {
+          "current_key": "AIzaSyA4NfnY5AMgIyuKObPUl-S3ic3HZEwR04Q"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "788960959653-hiukjn34sbiu25d6vncrv8eajop1149c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

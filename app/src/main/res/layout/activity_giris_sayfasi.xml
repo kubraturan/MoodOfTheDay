@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@drawable/arkaplan"
+    tools:context="com.example.developer.moodoftheday.ActivityGirisSayfasi">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:layout_margin="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="Giriş Yap"
+                android:textSize="21sp"
+                android:textColor="#c7ffffff"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="veya"
+                android:layout_weight="1"
+                android:textSize="21sp"
+                android:textColor="#c7ffffff"/>
+
+            <TextView
+                android:id="@+id/kaydol"
+                android:onClick="GirisClick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:text="Üye Ol"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:textSize="21sp"
+                android:textColor="#c7ffffff"/>
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/kullaniciAdi"
+            android:hint="Email / Kullanıcı Adı"
+            android:textColorHint="#9cffffff"
+            android:textColor="#fff"
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:padding="10dp"
+            android:background="@drawable/edittext_bg"/>
+
+        <EditText
+            android:id="@+id/sifre"
+            android:hint="Şifre"
+            android:textColorHint="#9cffffff"
+            android:textColor="#fff"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:background="@drawable/edittext_bg"/>
+
+        <Button
+            android:id="@+id/giris"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edittext_bg"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="Giriş Yap"
+            android:textColor="#d8ffffff" />
+
+        <TextView
+            android:id="@+id/unuttum"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Şifremi Unuttum"
+            android:textSize="17sp"
+            android:textColor="#c7ffffff"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
+

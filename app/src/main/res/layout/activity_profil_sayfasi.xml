@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#efefef"
+    tools:context="com.example.developer.moodoftheday.ActivityProfilSayfasi">
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="#4c3147">
+
+        <FrameLayout
+            android:id="@+id/bar_1"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/white_bg">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="15dp"
+                android:src="@drawable/ic_insert_chart" />
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="end"
+                android:layout_marginEnd="15dp"
+                android:src="@drawable/ic_email" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/bar_1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="1dp"
+            android:background="@drawable/white_bg">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="15dp"
+                android:src="@drawable/ic_chat_bubble" />
+
+            <ImageView
+                android:id="@+id/arkadaslar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="end"
+                android:layout_marginEnd="15dp"
+                android:src="@drawable/ic_people" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/bar_profile"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/circle_bg">
+
+            <ImageView
+                android:id="@+id/profilResmi"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="30dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bildirim" />
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bar_profile"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/AdSoyad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FFF"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/memleket"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FFF"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/yas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FFF"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+    
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/profildekiModlar"
+        android:layout_below="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/recycler_row"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/Mood"
+        android:src="@drawable/ic_add_white"
+        app:fabSize="normal"
+        app:backgroundTint="#4c3147"
+        android:layout_margin="5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/gizlilikAyarlari"
+        android:layout_toStartOf="@+id/Mood"
+        android:src="@drawable/ic_privacy"
+        app:fabSize="mini"
+        app:backgroundTint="#4c3147"
+        android:layout_margin="5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

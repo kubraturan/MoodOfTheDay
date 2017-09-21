@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/GotoProfile"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Profil" />
+        <item
+            android:id="@+id/Arkadaslar"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Arkadaslar" />
+
+        <item
+            android:id="@+id/Message"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Message" />
+
+        <item
+            android:id="@+id/nav_send"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Modum" />
+
+        <item
+            android:id="@+id/ara"
+            android:icon="@drawable/ic_search_black_24dp"
+            android:title="Ara" />
+        <item
+            android:id="@+id/sohbet"
+            android:icon="@drawable/ic_chat_bubble_outline_black_24dp"
+            android:title="Sohbete Başla" />
+
+
+
+    </group>
+
+
+    <group
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/ayarlarGizlilik"
+            android:icon="@drawable/ic_settings_black_24dp"
+            android:title="Ayarlar ve Gizlilik" />
+        <item
+            android:id="@+id/share"
+            android:icon="@drawable/ic_menu_share"
+            android:title="Share" />
+
+
+
+    </group>
+
+
+
+</menu>

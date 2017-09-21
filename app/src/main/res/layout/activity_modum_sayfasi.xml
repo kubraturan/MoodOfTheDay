@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#efefef"
+    tools:context="com.example.developer.moodoftheday.ActivityModumSayfasi">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/header"
+        android:background="#4c3147"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="260dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:civ_border_color="#FFF"
+            app:civ_border_width="5dp"
+            android:src="@drawable/ic_add_white" />
+
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Günün durumunu ekle"
+            android:textColor="#FFF"
+            android:textSize="21sp"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+    <android.support.v7.widget.CardView
+        app:cardElevation="7dp"
+        app:cardCornerRadius="10dp"
+        android:layout_marginTop="220dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:background="#cc5b5b"
+                android:layout_width="match_parent"
+                android:layout_height="170dp">
+
+                <ImageView
+                    android:id="@+id/resDurEkle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_wallpaper" />
+
+            </FrameLayout>
+
+            <EditText
+                android:id="@+id/sonDurum"
+                android:gravity="start"
+                android:padding="5dp"
+                android:hint="Mesajınız"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:inputType="textMultiLine"
+                android:background="@android:color/transparent"/>
+
+            <TextView
+                android:id="@+id/modunDurumu"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/modGosterge"
+                android:scaleType="centerCrop"
+                android:layout_width="match_parent"
+                android:layout_height="5dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:layout_weight="1"
+                    android:id="@+id/paylas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#313131"
+                    android:text="Paylaş"
+                    android:textColor="#FFF"
+                    android:textStyle="bold"/>
+
+                <View
+                    android:background="@android:color/darker_gray"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"/>
+
+                <Button
+                    android:layout_weight="1"
+                    android:id="@+id/modEkle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#313131"
+                    android:text="Mod"
+                    android:textColor="#FFF"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="5dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
+                android:layout_width="54dp"
+                android:layout_height="54dp"
+                app:civ_border_color="#000"
+                app:civ_border_width="1dp"
+                android:src="@drawable/bildirim"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_toEndOf="@+id/profile_image"
+                android:id="@+id/profile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Samet Aylak"
+                android:textColor="#292929"
+                android:textStyle="bold"
+                android:textSize="21sp"/>
+
+            <TextView
+                android:id="@+id/PmodAdi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Neşeli"
+                android:textColor="#292929"
+                android:textSize="18sp"
+                android:layout_below="@+id/profile_name"
+                android:layout_alignLeft="@+id/profile_name"
+                android:layout_alignStart="@+id/profile_name" />
+
+            <TextView
+                android:id="@+id/tarih"
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/saat"
+                android:layout_below="@+id/tarih"
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/paylasilacakResim"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:src="@color/colorAccent"/>
+
+        <TextView
+            android:id="@+id/PmodDurumu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:padding="5dp"
+            android:gravity="center"
+            android:text="Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum "
+            android:textColor="#292929"
+            android:textSize="15sp"/>
+
+        <ImageView
+            android:id="@+id/PmodResmi"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:scaleType="centerCrop"
+            android:src="@color/colorPrimaryDark"/>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
