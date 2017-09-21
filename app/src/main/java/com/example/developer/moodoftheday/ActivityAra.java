@@ -33,45 +33,49 @@ DatabaseReference dbref,ArkadasListesi;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ara);
-
+        Log.d("deneme","geldi");
          Intent araFake=getIntent();
          araFake.getExtras().getString("ara");
 
-
-        search=(SearchView)findViewById(R.id.araKisileri);
+        Log.d("deneme","geldi");
+       // search=(SearchView)findViewById(R.id.araKisileri);
         dbref = FirebaseDatabase.getInstance().getReference("users");
         ArkadasListesi=FirebaseDatabase.getInstance().getReference("ArkadasListesi");
         user = firebaseAuth.getInstance().getCurrentUser();
 
 
-
+        Log.d("deneme","geldi");
         dbref.addValueEventListener(new ValueEventListener() {
 
                                         @Override
                                         public void onDataChange(DataSnapshot dataSnapshot) {
                                             for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                                                 ara = postSnapshot.getValue(Kisiler.class);
-
+                                                Log.d("deneme","geldi");
                                                 ara.getId();
-                                                ara.getName();
-                                                ara.getKisiResmi();
-                                                ara.getProfilGizlilik();
-                                                if (ara.getId().equals(user.getUid())) {
+//                                                ara.getName();
+//                                                ara.getKisiResmi();
+//                                                ara.getProfilGizlilik();
+//                                                Log.d("deneme",user.getUid());
+//                                                Log.d("deneme",ara.getId());
+//                                               if (ara.getId().equals(user.getUid())) {
+//
+//                                                } else {
+//                                                   kisi.add(ara);
+//                                                }
+//                                                Log.d("deneme","geldi");
 
-                                                } else {
-                                                    kisi.add(ara);
-                                                }
-
+                                                kisi.add(ara);
                                             }
 
 
 
-
+                                            Log.d("deneme","geldi");
                 araListe = (ListView) findViewById(R.id.araListe);
 
                 araAdapter adapter = new araAdapter(ActivityAra.this, kisi);
                 araListe.setAdapter(adapter);
-
+                                            Log.d("deneme","geldi");
 
                 araListe.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
@@ -90,6 +94,7 @@ DatabaseReference dbref,ArkadasListesi;
 
 
                                     }
+                                    Log.d("deneme","geldi");
                                         if (elemanlar.contains(user.getUid())) {
 
                                             Intent git = new Intent(ActivityAra.this, ActivityArkadaslar.class);

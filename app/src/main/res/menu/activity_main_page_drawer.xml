@@ -29,6 +29,10 @@
             android:id="@+id/sohbet"
             android:icon="@drawable/ic_chat_bubble_outline_black_24dp"
             android:title="Sohbete Başla" />
+        <item
+            android:id="@+id/cikis"
+            android:icon="@drawable/ic_chat_bubble_outline_black_24dp"
+            android:title="Çıkış Yap" />
 
 
 

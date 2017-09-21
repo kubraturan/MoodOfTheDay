@@ -1,18 +1,11 @@
 package com.example.developer.moodoftheday;
 
-import android.app.Activity;
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -28,8 +21,7 @@ public class araAdapter extends BaseAdapter {
     Context context;
 
     public araAdapter(Context activity, List<Kisiler> aranacak) {
-        modInflater = (LayoutInflater) activity.getSystemService(
-                Context.LAYOUT_INFLATER_SERVICE);
+        modInflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.aranacak = aranacak;
         this.context = activity;
     }
@@ -55,17 +47,9 @@ public class araAdapter extends BaseAdapter {
         TextView ad= (TextView) lineView.findViewById(R.id.isim);
         ImageButton profResmi = (ImageButton) lineView.findViewById(R.id.profResmii);
 
-
-
-
-
         final Kisiler ara = aranacak.get(position);
         ad.setText(ara.getName());
         Glide.with(context).load(ara.getKisiResmi()).into(profResmi);
-
-
-
-
 
         return lineView;
     }

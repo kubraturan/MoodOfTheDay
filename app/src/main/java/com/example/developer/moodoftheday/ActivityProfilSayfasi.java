@@ -1,13 +1,11 @@
 package com.example.developer.moodoftheday;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -16,27 +14,19 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -47,8 +37,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
-import com.tooltip.OnClickListener;
-import com.tooltip.Tooltip;
 
 import java.io.File;
 import java.io.IOException;
@@ -66,18 +54,18 @@ public class ActivityProfilSayfasi extends AppCompatActivity {
     private static final int fotograf = 1;
     private static final int resim = 2;
     private Uri imageUri;
-    DatabaseReference dbref,refKisiFoto;
+    DatabaseReference dbref,refKisiFoto,dbrefArkadas;
     ListView durumListesi;
     List<modumProfil> liste=new ArrayList<modumProfil>();
     Kisiler kisi=new Kisiler();
     Menu menumuz;
     StorageReference storageReference,profResIcin;
-    ImageView arkadasListesi,profilResmi;
+    ImageView arkListe,profilResmi;
     FloatingActionButton gizlilikAyarlari;
     String currentPhotoPath;
     private RecyclerView recycler_view;
     TextView isim,memleket,yas;
-
+    FrameLayout barProfile;
 
 
     public static String alınan;
@@ -95,12 +83,28 @@ public class ActivityProfilSayfasi extends AppCompatActivity {
         final String gelecekOlanKisi = fakeDataa.getStringExtra("gelecekOlanKisi");
 
         dbref = FirebaseDatabase.getInstance().getReference("kullaniciModlari").child(gelecekOlanKisi);
+        dbref = FirebaseDatabase.getInstance().getReference("kullaniciModlari").child(gelecekOlanKisi);
         refKisiFoto = FirebaseDatabase.getInstance().getReference("users").child(gelecekOlanKisi);
-
         profilResmi = (ImageView) findViewById(R.id.profilResmi);
-         isim=(TextView) findViewById(R.id.AdSoyad) ;
+        isim=(TextView) findViewById(R.id.AdSoyad) ;
         memleket=(TextView) findViewById(R.id.memleket );
         yas=(TextView) findViewById(R.id.yas);
+        arkListe=(ImageView) findViewById(R.id.arkadaslar);
+        barProfile = (FrameLayout) findViewById(R.id.bar_profile);
+
+
+
+
+        arkListe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent Git=new Intent(ActivityProfilSayfasi.this,ActivityArkadasListesi.class);
+                startActivity(Git);
+
+            }
+        });
+
+       barProfile.setBackgroundResource(R.drawable.ovalmavi);
 
         refKisiFoto.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -137,6 +141,7 @@ public class ActivityProfilSayfasi extends AppCompatActivity {
 
             }
         });
+
 
 
 
@@ -255,6 +260,8 @@ public class ActivityProfilSayfasi extends AppCompatActivity {
                     modumProfil customer = postSnapshot.getValue(modumProfil.class);
                     liste.add(customer);
                     Collections.reverse(liste);
+
+
                 }
 
 
@@ -334,16 +341,6 @@ public class ActivityProfilSayfasi extends AppCompatActivity {
        gizlilikAyarlari.setBackgroundResource(alinanGizlilik);
 
 
-        arkadasListesi = (ImageView) findViewById(R.id.arkadaslar);
-       // arkadasListesi=(ImageView) findViewById(R.id.arkadaslar);
-        arkadasListesi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i=new Intent(ActivityProfilSayfasi.this,ActivityArkadasListesi.class);
-                i.putExtra("kisiIdsi",gelecekOlanKisi);
-                startActivity(i);
-            }
-        });
 
     }
 
