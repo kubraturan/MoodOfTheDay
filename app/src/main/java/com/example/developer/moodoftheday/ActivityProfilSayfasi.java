@@ -62,6 +62,8 @@ public class ActivityProfilSayfasi extends AppCompatActivity {
     DatabaseReference dbref,refKisiFoto,dbrefArkadas,refGizlilik;
     ListView durumListesi;
     List<modumProfil> liste=new ArrayList<modumProfil>();
+    List<String> resLİst=new ArrayList<>();
+
     Kisiler kisi=new Kisiler();
     Menu menumuz;
     StorageReference storageReference,profResIcin;
@@ -70,7 +72,7 @@ public class ActivityProfilSayfasi extends AppCompatActivity {
 
     FloatingActionButton gizlilikAyarlari;
     String currentPhotoPath;
-    private RecyclerView recycler_view;
+    private RecyclerView recycler_view,resimOlmazsaRecyler;
     TextView isim,memleket,yas;
     FrameLayout barProfile;
     FirebaseUser user;
@@ -85,7 +87,6 @@ public class ActivityProfilSayfasi extends AppCompatActivity {
 
         user= FirebaseAuth.getInstance().getCurrentUser();
 
-        dbref = FirebaseDatabase.getInstance().getReference("kullaniciModlari").child(user.getUid());
         dbref = FirebaseDatabase.getInstance().getReference("kullaniciModlari").child(user.getUid());
         refKisiFoto = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
         refGizlilik = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("profilGizlilik");
@@ -271,48 +272,56 @@ public class ActivityProfilSayfasi extends AppCompatActivity {
                     modumProfil customer = postSnapshot.getValue(modumProfil.class);
                     liste.add(customer);
                     Collections.reverse(liste);
-
-
+                    Toast.makeText(getApplicationContext(),customer.getModAdi(),Toast.LENGTH_LONG).show();
                 }
 
 
-
-                if( liste.get(0).getModAdi().equals("Kırmızı:Hareketli Canlı Hissediyorum")) {
-                    barProfile.setBackgroundResource(R.drawable.ovalkirmizi);
-
-
-                }
-               else if( liste.get(0).getModAdi().equals("Gri:Bunalmış Hissediyorum"))
-                {
-                    barProfile.setBackgroundResource(R.drawable.ovalgri);}
-
-             else   if( liste.get(0).getModAdi().equals("Mavi:Sakin,Rahat ve Özgür Hissediyorum"))
-                {
-                    barProfile.setBackgroundResource(R.drawable.ovalmavi);}
-                else   if( liste.get(0).getModAdi().equals("Kahverengi:Duygusal Hissediyorum"))
-                {
-                    barProfile.setBackgroundResource(R.drawable.ovalkahverengi);}
-                else   if( liste.get(0).getModAdi().equals("Mor:Umutlu Hissediyorum"))
-                {
-                    barProfile.setBackgroundResource(R.drawable.ovalmor);}
-                else   if( liste.get(0).getModAdi().equals("Pembe:Neşeli Hissediyorum"))
-                {
-                    barProfile.setBackgroundResource(R.drawable.ovalpembe);}
-                else   if( liste.get(0).getModAdi().equals("Turuncu:Cesaretli ve Güven Dolu Hissediyorum"))
-                {
-                    barProfile.setBackgroundResource(R.drawable.ovalturuncu);}
-                else   if( liste.get(0).getModAdi().equals("Yeşil:Huzurlu Hissediyorum"))
-                {
-                    barProfile.setBackgroundResource(R.drawable.ovalyesil);}
-                else   if( liste.get(0).getModAdi().equals("Sarı:Hüzünlü ve Özlemiş Hissediyorum"))
-                {
-                    barProfile.setBackgroundResource(R.drawable.ovalsari);}
-                else   if( liste.get(0).getModAdi().equals("Siyah:Üzgün ve Mutsuz Hissediyorum"))
-                {
-                    barProfile.setBackgroundResource(R.drawable.ovalsiyah);}
-                else   if( liste.get(0).getModAdi().equals("Beyaz:Mutlu Hissediyorum"))
-                {
-                    barProfile.setBackgroundResource(R.drawable.ovalbeyaz);}
+//if(liste.size()==0){
+//    barProfile.setBackgroundResource(R.drawable.ovalbeyaz);
+//
+//
+//}
+//
+//                if( liste.get(0).getModAdi().equals("Kırmızı:Hareketli Canlı Hissediyorum")) {
+//                    barProfile.setBackgroundResource(R.drawable.ovalkirmizi);
+//
+//
+//                }
+//               else if( liste.get(0).getModAdi().equals("Gri:Bunalmış Hissediyorum"))
+//                {
+//                    barProfile.setBackgroundResource(R.drawable.ovalgri);}
+//
+//             else   if( liste.get(0).getModAdi().equals("Mavi:Sakin,Rahat ve Özgür Hissediyorum"))
+//                {
+//                    barProfile.setBackgroundResource(R.drawable.ovalmavi);}
+//                else   if( liste.get(0).getModAdi().equals("Kahverengi:Duygusal Hissediyorum"))
+//                {
+//                    barProfile.setBackgroundResource(R.drawable.ovalkahverengi);}
+//                else   if( liste.get(0).getModAdi().equals("Mor:Umutlu Hissediyorum"))
+//                {
+//                    barProfile.setBackgroundResource(R.drawable.ovalmor);}
+//                else   if( liste.get(0).getModAdi().equals("Pembe:Neşeli Hissediyorum"))
+//                {
+//                    barProfile.setBackgroundResource(R.drawable.ovalpembe);}
+//                else   if( liste.get(0).getModAdi().equals("Turuncu:Cesaretli ve Güven Dolu Hissediyorum"))
+//                {
+//                    barProfile.setBackgroundResource(R.drawable.ovalturuncu);}
+//                else   if( liste.get(0).getModAdi().equals("Yeşil:Huzurlu Hissediyorum"))
+//                {
+//                    barProfile.setBackgroundResource(R.drawable.ovalyesil);}
+//                else   if( liste.get(0).getModAdi().equals("Sarı:Hüzünlü ve Özlemiş Hissediyorum"))
+//                {
+//                    barProfile.setBackgroundResource(R.drawable.ovalsari);}
+//                else   if( liste.get(0).getModAdi().equals("Siyah:Üzgün ve Mutsuz Hissediyorum"))
+//                {
+//                    barProfile.setBackgroundResource(R.drawable.ovalsiyah);}
+//                else
+//                {
+//
+//
+//
+//                    barProfile.setBackgroundResource(R.drawable.ovalbeyaz);}
+//
 
 
                 recycler_view = (RecyclerView)findViewById(R.id.profildekiModlar);
@@ -320,7 +329,13 @@ public class ActivityProfilSayfasi extends AppCompatActivity {
                 LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
                 layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                 layoutManager.scrollToPosition(0);
+
+
                 profilModAdapterr adapter_items = new profilModAdapterr(dbref.getKey(),liste,getApplicationContext(),new CustomItemClickListener(){
+
+
+
+
                 @Override
                 public void onItemClick(View v, int position) {
 
@@ -345,12 +360,12 @@ public class ActivityProfilSayfasi extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
 
             }
+
+
+
         });
 
 
-
-        Intent databaseDurum=getIntent();
-        final String aaa=databaseDurum.getExtras().getString("gizlilik esası");
 
 
         gizlilikAyarlari = (FloatingActionButton) findViewById(R.id.gizlilikAyarlari);
@@ -362,15 +377,18 @@ public class ActivityProfilSayfasi extends AppCompatActivity {
                 popup.getMenuInflater().inflate(R.menu.menu, popup.getMenu());
                 popup.setOnMenuItemClickListener(new android.widget.PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(final MenuItem item) {
-
                         refGizlilik.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
-                                List<String> postValues = new ArrayList<String>();
+                                List<Kisiler> post = new ArrayList<Kisiler>();
 
                                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                                    postValues.add(postSnapshot.getValue().toString());
-                                    Log.d("deneme",postSnapshot.getValue().toString());
+                                    Kisiler gel=postSnapshot.getValue(Kisiler.class);
+                                    gel.getProfilGizlilik();
+                                    Log.d("heyyo", gel.getProfilGizlilik());
+                                    // postValues.add(postSnapshot.getValue().toString());
+                                    post.add(gel);
+                                    Log.d("heyyo", gel.getProfilGizlilik());
 
                                  if(postSnapshot.getValue().toString().equals("Herkese Açık")){
                                      switch (item.getItemId()) {

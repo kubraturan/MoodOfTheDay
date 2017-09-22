@@ -205,6 +205,7 @@ public class ActivityModumSayfasi extends AppCompatActivity {
 
 
                                     id = dbref.push().getKey();
+
                                     al = new modumProfil(modunDurumu.getText().toString(), profResmi, saat, tarih);
                                     //  paylasilacakResim.setVisibility(View.INVISIBLE);
 
@@ -267,7 +268,7 @@ public class ActivityModumSayfasi extends AppCompatActivity {
         window.setLayout(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         window.setGravity(Gravity.CENTER);
 
-         builder.create().show();
+       //  builder.create().show();
         modList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

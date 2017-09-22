@@ -8,87 +8,87 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
-        android:orientation="vertical"
-        android:elevation="10dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:elevation="10dp"
+        android:orientation="vertical">
 
         <RelativeLayout
-            android:padding="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:padding="10dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profile_image"
                 android:layout_width="54dp"
                 android:layout_height="54dp"
-                app:civ_border_color="#000"
-                app:civ_border_width="1dp"
-                android:src="@drawable/bildirim"
-                android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/bildirim"
+                app:civ_border_color="#000"
+                app:civ_border_width="1dp" />
 
             <TextView
-                android:layout_toEndOf="@+id/profile_image"
                 android:id="@+id/profile_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/profile_image"
                 android:text="Samet Aylak"
                 android:textColor="#292929"
-                android:textStyle="bold"
-                android:textSize="21sp"/>
+                android:textSize="21sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/PmodAdi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/profile_name"
+                android:layout_alignStart="@+id/profile_name"
+                android:layout_below="@+id/profile_name"
                 android:text="Neşeli"
                 android:textColor="#292929"
-                android:textSize="18sp"
-                android:layout_below="@+id/profile_name"
-                android:layout_alignLeft="@+id/profile_name"
-                android:layout_alignStart="@+id/profile_name" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/tarih"
-                android:layout_alignParentEnd="true"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true" />
 
             <TextView
                 android:id="@+id/saat"
-                android:layout_below="@+id/tarih"
-                android:layout_alignParentEnd="true"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/tarih" />
 
         </RelativeLayout>
 
         <ImageView
             android:id="@+id/paylasilacakResim"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:scaleType="centerCrop"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:src="@color/colorAccent"/>
+            android:src="@color/colorAccent" />
 
         <TextView
             android:id="@+id/PmodDurumu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:padding="5dp"
             android:gravity="center"
+            android:padding="5dp"
             android:text="Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum "
             android:textColor="#292929"
-            android:textSize="15sp"/>
+            android:textSize="15sp" />
 
         <ImageView
             android:id="@+id/PmodResmi"
             android:layout_width="match_parent"
             android:layout_height="10dp"
             android:scaleType="centerCrop"
-            android:src="@color/colorPrimaryDark"/>
+            android:src="@color/colorPrimaryDark" />
 
     </LinearLayout>
 

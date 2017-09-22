@@ -124,6 +124,7 @@
         android:layout_height="match_parent"
         tools:listitem="@layout/recycler_row"/>
 
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/Mood"
         android:src="@drawable/ic_add_white"

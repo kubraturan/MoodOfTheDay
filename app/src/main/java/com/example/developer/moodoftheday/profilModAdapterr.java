@@ -1,37 +1,23 @@
 package com.example.developer.moodoftheday;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -118,15 +104,21 @@ public class profilModAdapterr extends RecyclerView.Adapter<profilModAdapterr.Vi
     }
 
 
+
+
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         //user=FirebaseAuth.getInstance().getCurrentUser();
         //user=modDurumlarıList.get(position).getId();
+
         refKisiBil=FirebaseDatabase.getInstance().getReference("users");
       //  refKisiBil.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
         refKisiBil.child(user).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+
 
                holder.kisiProfRes.setImageResource(Integer.valueOf(dataSnapshot.child("kisiResmi").getValue().toString()));
                 holder.KisiAdi.setText(dataSnapshot.child("name").getValue().toString());
@@ -139,16 +131,6 @@ public class profilModAdapterr extends RecyclerView.Adapter<profilModAdapterr.Vi
             }
         });
 
-
-
-
-
-
-
-
-
-
-//
 //        PmodResmi.setImageResource(mod.getProfResmi());
 //        Glide.with(context).load(mod.getResimUrl()).into(PmodPaylasilanResim);
 //        tarih.setText(mod.getTarih());
@@ -165,7 +147,7 @@ public class profilModAdapterr extends RecyclerView.Adapter<profilModAdapterr.Vi
         holder.PmodResmi.setImageResource(modDurumlarıList.get(position).getProfResmi());
 
         if (modDurumlarıList.get(position).getResimUrl()==null) {
-            holder.PmodPaylasilanResim.setImageResource(R.drawable.arkaplan);
+            holder.PmodPaylasilanResim.setImageResource(R.drawable.fake);
 
         } else {
 
