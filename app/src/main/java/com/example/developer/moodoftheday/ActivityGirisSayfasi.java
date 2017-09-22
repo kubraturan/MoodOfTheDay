@@ -50,14 +50,15 @@ public class ActivityGirisSayfasi extends AppCompatActivity {
         FirebaseUser  user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             // User is signed in
-            String id=user.getUid();
-            kisiRef=dbreference.child(id);
+            String id = user.getUid();
+            kisiRef = dbreference.child(id);
             kisiRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     kullaniciAdi.setText(dataSnapshot.child("email").getValue().toString());
                     sifre.setText(dataSnapshot.child("password").getValue().toString());
                 }
+
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
@@ -69,6 +70,8 @@ public class ActivityGirisSayfasi extends AppCompatActivity {
 
 
         }
+
+
 
     }
 
@@ -126,6 +129,7 @@ public class ActivityGirisSayfasi extends AppCompatActivity {
                 mAuth.signInWithEmailAndPassword(kullaniciAdi.getText().toString().trim(), sifre.getText().toString().trim()).addOnCompleteListener(ActivityGirisSayfasi.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+
                         if( isConnected){
                             if (task.isSuccessful()) {
 
@@ -134,6 +138,7 @@ public class ActivityGirisSayfasi extends AppCompatActivity {
                                 //intent.putExtra("gelecekOlanKisi", mAuth.getCurrentUser().getUid());
                                 startActivity(intent);
                                 finish();
+
 
 
                             }
@@ -145,6 +150,7 @@ public class ActivityGirisSayfasi extends AppCompatActivity {
 
                             }}
                         else if(isConnected==false ){
+
 
                             Toast.makeText(getApplicationContext(), "Internet Bağlantınızı Kontrol Edin", Toast.LENGTH_SHORT).show();
 

@@ -247,7 +247,14 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
             ara.putExtra("ara","");
             startActivity(ara);
 
-    }
+        }  if (id == R.id.Cikis) {
+
+            Intent cikis=new Intent(getApplicationContext(),ActivityGirisSayfasi.class);
+            startActivity(cikis);
+
+
+        }
+
 
 
 

@@ -90,7 +90,6 @@ public class ActivityProfilSayfasi extends AppCompatActivity {
         refKisiFoto = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
         refGizlilik = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("profilGizlilik");
         profilResmi = (ImageView) findViewById(R.id.profilResmi);
-
         mainPage=(ImageView) findViewById(R.id.mainpage);
 
         isim=(TextView) findViewById(R.id.AdSoyad) ;
