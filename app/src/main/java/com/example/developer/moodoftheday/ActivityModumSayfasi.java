@@ -160,6 +160,7 @@ public class ActivityModumSayfasi extends AppCompatActivity {
         });
         //todo:database ekleme işlemlerini yapalım
         modunDurumu = (TextView) findViewById(R.id.modunDurumu);
+        modunDurumu.setText("mod ekle");
         sonDurum = (EditText) findViewById(R.id.sonDurum);
         paylasilacakResim=(ImageView) findViewById(R.id.paylasilacakResim) ;
         intent=getIntent();
@@ -173,7 +174,13 @@ public class ActivityModumSayfasi extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                            if(image == null) {
+
+
+
+                if(!(modunDurumu.getText().toString()).equals("mod ekle")){
+
+                          if(image == null) {
+
 
                               id = dbref.push().getKey();
                                 al = new modumProfil(modunDurumu.getText().toString(), sonDurum.getText().toString(),saat,tarih, profResmi);
@@ -181,7 +188,10 @@ public class ActivityModumSayfasi extends AppCompatActivity {
 
                                 dbref.child(id).setValue(al);
 
-                                Toast.makeText(ActivityModumSayfasi.this, "Upload Done", Toast.LENGTH_LONG).show();}
+                                Toast.makeText(ActivityModumSayfasi.this, "Upload Done", Toast.LENGTH_LONG).show();
+                                    Intent intent=new Intent(ActivityModumSayfasi.this,ActivityProfilSayfasi.class);
+                                    startActivity(intent);
+                          }
 
                                 else if(sonDurum.getText().toString()==null){
                                     storageReference= FirebaseStorage.getInstance().getReference("resimler");
@@ -198,6 +208,8 @@ public class ActivityModumSayfasi extends AppCompatActivity {
                                             dbref.child(id).setValue(al);
 
                                             Toast.makeText(ActivityModumSayfasi.this, "Upload Done", Toast.LENGTH_LONG).show();
+                                            Intent intent=new Intent(ActivityModumSayfasi.this,ActivityProfilSayfasi.class);
+                                            startActivity(intent);
 
                                         }});}
                                 else if(image==null && sonDurum.getText().toString()==null){
@@ -212,6 +224,8 @@ public class ActivityModumSayfasi extends AppCompatActivity {
                                     dbref.child(id).setValue(al);
 
                                     Toast.makeText(ActivityModumSayfasi.this, "Upload Done", Toast.LENGTH_LONG).show();
+                              Intent intent=new Intent(ActivityModumSayfasi.this,ActivityProfilSayfasi.class);
+                              startActivity(intent);
 
 
                                 }
@@ -229,10 +243,14 @@ public class ActivityModumSayfasi extends AppCompatActivity {
                                             dbref.child(id).setValue(al);
 
                                             Toast.makeText(ActivityModumSayfasi.this, "Upload Done", Toast.LENGTH_LONG).show();
+                                            Intent intent=new Intent(ActivityModumSayfasi.this,ActivityProfilSayfasi.class);
+                                            startActivity(intent);
 
                                         }
                                     });
-                                }
+                                }}else{
+                    Toast.makeText(ActivityModumSayfasi.this, "Lütfen Modunuzu Giriniz", Toast.LENGTH_SHORT).show();
+                }
 
 
 

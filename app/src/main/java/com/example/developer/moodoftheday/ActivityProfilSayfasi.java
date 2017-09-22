@@ -271,7 +271,7 @@ public class ActivityProfilSayfasi extends AppCompatActivity {
                     modumProfil customer = postSnapshot.getValue(modumProfil.class);
                     liste.add(customer);
                     Collections.reverse(liste);
-                    Toast.makeText(getApplicationContext(),customer.getModAdi(),Toast.LENGTH_LONG).show();
+
                 }
 
 

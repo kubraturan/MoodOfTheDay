@@ -27,7 +27,7 @@
             android:layout_marginTop="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Günün durumunu ekle"
+            android:text="Günün modunu ekle"
             android:textColor="#FFF"
             android:textSize="21sp"
             android:textStyle="bold"/>
