@@ -58,7 +58,7 @@ public class Kaydol extends AppCompatActivity implements  Validator.ValidationLi
     public String Password;
     public String Email;
     public String KullaniciAdi;
-    String kisiResmi="2130837591";
+    String kisiResmi;
     String id="78324623864823";
     String profilGizlilik="Herkese Açık";
     List<Kisiler> person=new ArrayList<>();
@@ -75,6 +75,7 @@ public class Kaydol extends AppCompatActivity implements  Validator.ValidationLi
         kullanıcıAdi = (EditText) findViewById(R.id.KullanıcıAdıEdit);
         validator = new Validator(this);
         validator.setValidationListener(this);
+        kisiResmi=String.valueOf(R.drawable.bilinmeyen);
 
     }
 

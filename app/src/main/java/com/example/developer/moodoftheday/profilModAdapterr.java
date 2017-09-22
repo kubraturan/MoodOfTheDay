@@ -120,7 +120,8 @@ public class profilModAdapterr extends RecyclerView.Adapter<profilModAdapterr.Vi
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        //user=FirebaseAuth.getInstance().getCurrentUser();
+        //
+        user=FirebaseAuth.getInstance().getCurrentUser().getUid();
         //user=modDurumlarıList.get(position).getId();
         refKisiBil=FirebaseDatabase.getInstance().getReference("users");
       //  refKisiBil.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
