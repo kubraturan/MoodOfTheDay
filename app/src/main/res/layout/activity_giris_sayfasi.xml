@@ -54,7 +54,7 @@
 
         <EditText
             android:id="@+id/kullaniciAdi"
-            android:hint="Email / Kullanıcı Adı"
+            android:hint="Email "
             android:textColorHint="#9cffffff"
             android:textColor="#fff"
             android:inputType="text"

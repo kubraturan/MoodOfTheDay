@@ -86,7 +86,6 @@ public class ActivityProfilSayfasi extends AppCompatActivity {
 
 
         user= FirebaseAuth.getInstance().getCurrentUser();
-
         dbref = FirebaseDatabase.getInstance().getReference("kullaniciModlari").child(user.getUid());
         refKisiFoto = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
         refGizlilik = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("profilGizlilik");

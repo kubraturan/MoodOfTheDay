@@ -47,9 +47,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class ActivityModumSayfasi extends AppCompatActivity {
     ImageView resEkle;
-    Button modEkle;
+    CircleImageView modEkle;
     ImageView paylasilacakResim;
     EditText sonDurum;
     TextView modunDurumu;
@@ -94,8 +96,7 @@ public class ActivityModumSayfasi extends AppCompatActivity {
 
 
 
-
-                //todo:kameradan resim çekerke resim yan dönmesi sorunu ve resim boyutu ayarlaması nasıl olacak
+        //todo:kameradan resim çekerke resim yan dönmesi sorunu ve resim boyutu ayarlaması nasıl olacak
         resEkle = (ImageView) findViewById(R.id.resDurEkle);
         resEkle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,7 +147,7 @@ public class ActivityModumSayfasi extends AppCompatActivity {
 
 
         //todo:Image buttona seçtiğimiz modun eklenmesi creatCustomDialog ile
-        modEkle=(Button) findViewById(R.id.modEkle);
+        modEkle=(CircleImageView) findViewById(R.id.modEkle);
         modEkle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

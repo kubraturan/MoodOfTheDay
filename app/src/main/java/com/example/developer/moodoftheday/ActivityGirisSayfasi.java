@@ -37,6 +37,7 @@ public class ActivityGirisSayfasi extends AppCompatActivity {
     EditText sifre, kullaniciAdi;
     TextView sifremiunuttum;
     Button giris;
+    String idl;
     //  ActivityProfilSayfasi gelecekolankisi=new ActivityProfilSayfasi();
     public DatabaseReference dbreference;
     public DatabaseReference kisiRef;
@@ -46,7 +47,6 @@ public class ActivityGirisSayfasi extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
         FirebaseUser  user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             // User is signed in
