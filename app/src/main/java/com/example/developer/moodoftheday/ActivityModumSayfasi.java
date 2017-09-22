@@ -182,7 +182,10 @@ public class ActivityModumSayfasi extends AppCompatActivity {
 
                                 dbref.child(id).setValue(al);
 
-                                Toast.makeText(ActivityModumSayfasi.this, "Upload Done", Toast.LENGTH_LONG).show();}
+                                Toast.makeText(ActivityModumSayfasi.this, "Upload Done", Toast.LENGTH_LONG).show();
+                                    Intent intent=new Intent(ActivityModumSayfasi.this,ActivityProfilSayfasi.class);
+                                    startActivity(intent);
+                          }
 
                                 else if(sonDurum.getText().toString()==null){
                                     storageReference= FirebaseStorage.getInstance().getReference("resimler");
@@ -199,6 +202,8 @@ public class ActivityModumSayfasi extends AppCompatActivity {
                                             dbref.child(id).setValue(al);
 
                                             Toast.makeText(ActivityModumSayfasi.this, "Upload Done", Toast.LENGTH_LONG).show();
+                                            Intent intent=new Intent(ActivityModumSayfasi.this,ActivityProfilSayfasi.class);
+                                            startActivity(intent);
 
                                         }});}
                                 else if(image==null && sonDurum.getText().toString()==null){
@@ -213,6 +218,8 @@ public class ActivityModumSayfasi extends AppCompatActivity {
                                     dbref.child(id).setValue(al);
 
                                     Toast.makeText(ActivityModumSayfasi.this, "Upload Done", Toast.LENGTH_LONG).show();
+                              Intent intent=new Intent(ActivityModumSayfasi.this,ActivityProfilSayfasi.class);
+                              startActivity(intent);
 
 
                                 }
@@ -230,6 +237,8 @@ public class ActivityModumSayfasi extends AppCompatActivity {
                                             dbref.child(id).setValue(al);
 
                                             Toast.makeText(ActivityModumSayfasi.this, "Upload Done", Toast.LENGTH_LONG).show();
+                                            Intent intent=new Intent(ActivityModumSayfasi.this,ActivityProfilSayfasi.class);
+                                            startActivity(intent);
 
                                         }
                                     });
