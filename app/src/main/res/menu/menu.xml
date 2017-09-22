@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+
+    <item android:title="Profil Gizliliğini Düzenle">
+        <menu>
+            <group android:checkableBehavior="single">
     <item
-        android:id="@+id/gizliligiDzenle"
-        android:title="Gizliliği Düzenle" />
+        android:id="@+id/herkes"
+        android:icon="@drawable/ic_public_black_24dp"
+
+        android:title="Herkese Açık" />
     <item
-        android:id="@+id/sil"
-        android:title="Sil" />
+        android:id="@+id/arkadaslar"
+        android:icon="@drawable/ic_people_outline_black_24dp"
+
+        android:title="Arkadaşlar" />
     <item
-        android:id="@+id/düzenle"
-        android:title="Düzenle" />
+        android:id="@+id/sadeceben"
+        android:icon="@drawable/ic_person_black_24dp"
+
+        android:title="Sadece Ben" />
+
+            </group>
+</menu>
+</item>
+
 </menu>

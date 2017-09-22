@@ -17,6 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +29,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -44,7 +47,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ActivityProfilSayfasi extends AppCompatActivity {
     static ArrayList <String> keys=new ArrayList<>();
@@ -54,39 +59,36 @@ public class ActivityProfilSayfasi extends AppCompatActivity {
     private static final int fotograf = 1;
     private static final int resim = 2;
     private Uri imageUri;
-    DatabaseReference dbref,refKisiFoto,dbrefArkadas;
+    DatabaseReference dbref,refKisiFoto,dbrefArkadas,refGizlilik;
     ListView durumListesi;
     List<modumProfil> liste=new ArrayList<modumProfil>();
     Kisiler kisi=new Kisiler();
     Menu menumuz;
     StorageReference storageReference,profResIcin;
 
-    ImageView arkadasListesi,profilResmi,mainPage,arkListe;
+    ImageView profilResmi,mainPage,arkListe;
 
     FloatingActionButton gizlilikAyarlari;
     String currentPhotoPath;
     private RecyclerView recycler_view;
     TextView isim,memleket,yas;
     FrameLayout barProfile;
+    FirebaseUser user;
 
 
-    public static String alınan;
-
-    public static void setAlınan(String alınan) {
-        ActivityProfilSayfasi.alınan = alınan;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profil_sayfasi);
 
-        Intent fakeDataa = getIntent();
-        final String gelecekOlanKisi = fakeDataa.getStringExtra("gelecekOlanKisi");
 
-        dbref = FirebaseDatabase.getInstance().getReference("kullaniciModlari").child(gelecekOlanKisi);
-        dbref = FirebaseDatabase.getInstance().getReference("kullaniciModlari").child(gelecekOlanKisi);
-        refKisiFoto = FirebaseDatabase.getInstance().getReference("users").child(gelecekOlanKisi);
+        user= FirebaseAuth.getInstance().getCurrentUser();
+
+        dbref = FirebaseDatabase.getInstance().getReference("kullaniciModlari").child(user.getUid());
+        dbref = FirebaseDatabase.getInstance().getReference("kullaniciModlari").child(user.getUid());
+        refKisiFoto = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
+        refGizlilik = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("profilGizlilik");
         profilResmi = (ImageView) findViewById(R.id.profilResmi);
 
         mainPage=(ImageView) findViewById(R.id.mainpage);
@@ -109,7 +111,6 @@ public class ActivityProfilSayfasi extends AppCompatActivity {
             }
         });
 
-       barProfile.setBackgroundResource(R.drawable.ovalmavi);
 
 
 
@@ -225,8 +226,7 @@ public class ActivityProfilSayfasi extends AppCompatActivity {
             }
         });
 
-        Intent alındı = getIntent();
-        final String alınannn = alındı.getExtras().getString("gelecekOlanKisi");
+
         mod = (FloatingActionButton) findViewById(R.id.Mood);
 
         mod.setOnClickListener(new View.OnClickListener() {
@@ -240,7 +240,7 @@ public class ActivityProfilSayfasi extends AppCompatActivity {
 
                             public void onClick(DialogInterface dialog, int which) {
                                 Intent intent = new Intent(getApplicationContext(), ActivityModumSayfasi.class);
-                                intent.putExtra("kisiReference", gelecekOlanKisi);
+                                intent.putExtra("kisiReference", user.getUid());
                                 startActivity(intent);
                                 finish();
                             }
@@ -261,8 +261,8 @@ public class ActivityProfilSayfasi extends AppCompatActivity {
             }
         });
 
-        Intent alinanGizlilikResmi=getIntent();
-        final int alinanGizlilik=alinanGizlilikResmi.getExtras().getInt("gizlilik esası");
+//        Intent alinanGizlilikResmi=getIntent();
+//        final int alinanGizlilik=alinanGizlilikResmi.getExtras().getInt("gizlilik esası");
 
         dbref.addValueEventListener(new ValueEventListener() {
 
@@ -275,6 +275,45 @@ public class ActivityProfilSayfasi extends AppCompatActivity {
 
 
                 }
+
+
+
+                if( liste.get(0).getModAdi().equals("Kırmızı:Hareketli Canlı Hissediyorum")) {
+                    barProfile.setBackgroundResource(R.drawable.ovalkirmizi);
+
+
+                }
+               else if( liste.get(0).getModAdi().equals("Gri:Bunalmış Hissediyorum"))
+                {
+                    barProfile.setBackgroundResource(R.drawable.ovalgri);}
+
+             else   if( liste.get(0).getModAdi().equals("Mavi:Sakin,Rahat ve Özgür Hissediyorum"))
+                {
+                    barProfile.setBackgroundResource(R.drawable.ovalmavi);}
+                else   if( liste.get(0).getModAdi().equals("Kahverengi:Duygusal Hissediyorum"))
+                {
+                    barProfile.setBackgroundResource(R.drawable.ovalkahverengi);}
+                else   if( liste.get(0).getModAdi().equals("Mor:Umutlu Hissediyorum"))
+                {
+                    barProfile.setBackgroundResource(R.drawable.ovalmor);}
+                else   if( liste.get(0).getModAdi().equals("Pembe:Neşeli Hissediyorum"))
+                {
+                    barProfile.setBackgroundResource(R.drawable.ovalpembe);}
+                else   if( liste.get(0).getModAdi().equals("Turuncu:Cesaretli ve Güven Dolu Hissediyorum"))
+                {
+                    barProfile.setBackgroundResource(R.drawable.ovalturuncu);}
+                else   if( liste.get(0).getModAdi().equals("Yeşil:Huzurlu Hissediyorum"))
+                {
+                    barProfile.setBackgroundResource(R.drawable.ovalyesil);}
+                else   if( liste.get(0).getModAdi().equals("Sarı:Hüzünlü ve Özlemiş Hissediyorum"))
+                {
+                    barProfile.setBackgroundResource(R.drawable.ovalsari);}
+                else   if( liste.get(0).getModAdi().equals("Siyah:Üzgün ve Mutsuz Hissediyorum"))
+                {
+                    barProfile.setBackgroundResource(R.drawable.ovalsiyah);}
+                else   if( liste.get(0).getModAdi().equals("Beyaz:Mutlu Hissediyorum"))
+                {
+                    barProfile.setBackgroundResource(R.drawable.ovalbeyaz);}
 
 
                 recycler_view = (RecyclerView)findViewById(R.id.profildekiModlar);
@@ -311,8 +350,8 @@ public class ActivityProfilSayfasi extends AppCompatActivity {
 
 
 
-//        Intent databaseDurum=getIntent();
-//        final String databaseDurumEkle=databaseDurum.getExtras().getString("databaseGizlilik");
+        Intent databaseDurum=getIntent();
+        final String aaa=databaseDurum.getExtras().getString("gizlilik esası");
 
 
         gizlilikAyarlari = (FloatingActionButton) findViewById(R.id.gizlilikAyarlari);
@@ -321,21 +360,165 @@ public class ActivityProfilSayfasi extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 android.widget.PopupMenu popup = new android.widget.PopupMenu(ActivityProfilSayfasi.this, gizlilikAyarlari);
-                popup.getMenuInflater().inflate(R.menu.gizlilikmenu, popup.getMenu());
+                popup.getMenuInflater().inflate(R.menu.menu, popup.getMenu());
                 popup.setOnMenuItemClickListener(new android.widget.PopupMenu.OnMenuItemClickListener() {
-                    public boolean onMenuItemClick(MenuItem item) {
+                    public boolean onMenuItemClick(final MenuItem item) {
+
+                        refGizlilik.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                List<String> postValues = new ArrayList<String>();
+
+                                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                                    postValues.add(postSnapshot.getValue().toString());
+                                    Log.d("deneme",postSnapshot.getValue().toString());
+
+                                 if(postSnapshot.getValue().toString().equals("Herkese Açık")){
+                                     switch (item.getItemId()) {
+                                         case R.id.herkes: {
+                                             Log.d("deneme", String.valueOf(item.getItemId()));
+
+                                             item.setChecked(true);
+                                         }
+
+                                 }
+
+
+                                }
+                                 else   if(postSnapshot.getValue().equals("Arkadaslar")){
+                                        switch (item.getItemId()) {
+                                            case R.id.arkadaslar: {
+
+                                                item.setChecked(true);
+                                            }
+
+                                        }
+
+
+                                    }
+                                 else   if(postSnapshot.getValue().equals("Sadece Ben")){
+                                        switch (item.getItemId()) {
+                                            case R.id.sadeceben: {
+
+                                                item.setChecked(true);
+                                            }
+
+                                        }
+
+
+                                    }
+
+
+                            } }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+
+
+
+
+
+
+
+
+
+
+
+
                         switch (item.getItemId()) {
-                            case R.id.gdüzenle:
+                            case R.id.herkes:
                             {
 
+                              //  Intent git=new Intent(ActivityProfilSayfasi.this,ActivityGizlilik.class);
+                                //   git.putExtra("kisiIdsiGönder","fake");
+                               // startActivity(git);
+                                refKisiFoto.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        Map<String, Object> postValues = new HashMap<String,Object>();
 
-                                Intent git=new Intent(ActivityProfilSayfasi.this,ActivityGizlilik.class);
-                                git.putExtra("kisiIdsiGönder",gelecekOlanKisi);
-                                startActivity(git);
+                                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                                            postValues.put(postSnapshot.getKey(),postSnapshot.getValue());
+
+                                            postValues.put("profilGizlilik","Herkese Açık");
+
+                                            refKisiFoto.updateChildren(postValues);
+
+                                        }
+
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+
+                                    }
+                                });
 
                             }
 
-                                break;
+                               break;
+                            case R.id.arkadaslar:
+                            {
+
+                                refKisiFoto.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        Map<String, Object> postValues = new HashMap<String,Object>();
+                                        Log.d("deneme","hata");
+
+                                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                                            postValues.put(postSnapshot.getKey(),postSnapshot.getValue());
+                                            Log.d("deneme","hata");
+
+                                            postValues.put("profilGizlilik","Arkadaşlar");
+
+                                            refKisiFoto.updateChildren(postValues);
+
+                                        }
+
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+
+                                    }
+                                });
+
+
+                            }
+                            break;
+                            case R.id.sadeceben:
+                            {
+
+                                refKisiFoto.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        Map<String, Object> postValues = new HashMap<String,Object>();
+
+                                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                                            postValues.put(postSnapshot.getKey(),postSnapshot.getValue());
+
+                                            postValues.put("profilGizlilik","Sadece Ben");
+
+                                            refKisiFoto.updateChildren(postValues);
+
+                                        }
+
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+
+                                    }
+                                });
+
+                            }
 
                         }
                        return true;
@@ -346,13 +529,15 @@ public class ActivityProfilSayfasi extends AppCompatActivity {
 
 
             }
-        });
+        });}
 
-       gizlilikAyarlari.setBackgroundResource(alinanGizlilik);
+     //  gizlilikAyarlari.setBackgroundResource(alinanGizlilik);
 
 
 
-    }
+
+
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {

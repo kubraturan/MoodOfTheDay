@@ -1,33 +1,34 @@
-package com.example.developer.moodoftheday;
 
-import android.content.Context;
-import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
+        package com.example.developer.moodoftheday;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+        import android.content.Context;
+        import android.content.Intent;
+        import android.net.ConnectivityManager;
+        import android.net.NetworkInfo;
+        import android.support.annotation.NonNull;
+        import android.support.v7.app.AppCompatActivity;
+        import android.os.Bundle;
+        import android.text.TextUtils;
+        import android.util.Log;
+        import android.view.View;
+        import android.widget.Button;
+        import android.widget.EditText;
+        import android.widget.TextView;
+        import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
+        import com.google.android.gms.tasks.OnCompleteListener;
+        import com.google.android.gms.tasks.Task;
+        import com.google.firebase.auth.AuthResult;
+        import com.google.firebase.auth.FirebaseAuth;
+        import com.google.firebase.auth.FirebaseUser;
+        import com.google.firebase.database.DataSnapshot;
+        import com.google.firebase.database.DatabaseError;
+        import com.google.firebase.database.DatabaseReference;
+        import com.google.firebase.database.FirebaseDatabase;
+        import com.google.firebase.database.ValueEventListener;
+
+        import java.util.ArrayList;
+        import java.util.List;
 
 public class ActivityGirisSayfasi extends AppCompatActivity {
 
@@ -38,6 +39,7 @@ public class ActivityGirisSayfasi extends AppCompatActivity {
     Button giris;
     //  ActivityProfilSayfasi gelecekolankisi=new ActivityProfilSayfasi();
     public DatabaseReference dbreference;
+    public DatabaseReference kisiRef;
     Kisiler kisi = new Kisiler();
     List<Kisiler> kisiler = new ArrayList<Kisiler>();
 
@@ -45,20 +47,35 @@ public class ActivityGirisSayfasi extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser  user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-            Intent fake=new Intent(ActivityGirisSayfasi.this,MainPage.class);
-            fake.putExtra("gelecekOlanKisi", user.getUid());
-            startActivity(fake);
-            finish();
+            // User is signed in
+            String id=user.getUid();
+            kisiRef=dbreference.child(id);
+            kisiRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    kullaniciAdi.setText(dataSnapshot.child("email").getValue().toString());
+                    sifre.setText(dataSnapshot.child("password").getValue().toString());
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+            //Log.d("Kontrol", "onAuthStateChanged:signed_in:" + user.getUid());
+
+
+        }
+
     }
 
-}
-
     @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_giris_sayfasi);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_giris_sayfasi);
 
         dbreference= FirebaseDatabase.getInstance().getReference("users");
         mAuth = FirebaseAuth.getInstance();// getInstance() metoduyla da bu sınıfın referans olduğu nesneleri kullanabilmekteyiz.
@@ -69,10 +86,9 @@ public class ActivityGirisSayfasi extends AppCompatActivity {
                 if (user != null) {
                     // User is signed in
 
-                    Log.d("Kontrol", "onAuthStateChanged:signed_in:" + user.getUid());
-                    Intent fake=new Intent(ActivityGirisSayfasi.this,MainPage.class);
-                    fake.putExtra("fake","");
-                    startActivity(fake);
+                    //Log.d("Kontrol", "onAuthStateChanged:signed_in:" + user.getUid());
+                    kullaniciAdi.setText(user.getEmail());
+                    sifre.setText(dbreference.child(user.getUid()).child("password").getKey());
                 } else {
                     // User is signed out
                     Log.d("Kontrol", "onAuthStateChanged:signed_out");
@@ -110,29 +126,29 @@ public class ActivityGirisSayfasi extends AppCompatActivity {
                 mAuth.signInWithEmailAndPassword(kullaniciAdi.getText().toString().trim(), sifre.getText().toString().trim()).addOnCompleteListener(ActivityGirisSayfasi.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                     if( isConnected==true){
-                         if (task.isSuccessful()) {
+                        if( isConnected){
+                            if (task.isSuccessful()) {
 
-                            ActivityProfilSayfasi.setAlınan(mAuth.getCurrentUser().getUid());
-                            Intent intent = new Intent(ActivityGirisSayfasi.this, MainPage.class);
-                                            intent.putExtra("gelecekOlanKisi", mAuth.getCurrentUser().getUid());
-                                            startActivity(intent);
-                                            finish();
+                               // ActivityProfilSayfasi.setAlınan(mAuth.getCurrentUser().getUid());
+                                Intent intent = new Intent(ActivityGirisSayfasi.this, MainPage.class);
+                                //intent.putExtra("gelecekOlanKisi", mAuth.getCurrentUser().getUid());
+                                startActivity(intent);
+                                finish();
 
 
-                         }
-                         else {
-                             Log.e("Giriş Hatası", task.getException().getMessage());
-                             kullaniciAdi.setText("");
-                             sifre.setText("");
-                             Toast.makeText(getApplicationContext(), "Kullanıcı Adı veya Şifre Hatalı  Tekrar Deneyin", Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+                                Log.e("Giriş Hatası", task.getException().getMessage());
+                                kullaniciAdi.setText("");
+                                sifre.setText("");
+                                Toast.makeText(getApplicationContext(), "Kullanıcı Adı veya Şifre Hatalı  Tekrar Deneyin", Toast.LENGTH_SHORT).show();
 
-                         }}
-                         else if(isConnected == false ){
+                            }}
+                        else if(isConnected==false ){
 
-                         Toast.makeText(getApplicationContext(), "Internet Bağlantınızı Kontrol Edin", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Internet Bağlantınızı Kontrol Edin", Toast.LENGTH_SHORT).show();
 
-                         }
+                        }
 
                     }
                 });
@@ -152,15 +168,15 @@ public class ActivityGirisSayfasi extends AppCompatActivity {
                 }
                 mAuth.sendPasswordResetEmail(kullaniciAdi.getText().toString().trim())
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(ActivityGirisSayfasi.this,"yeni parola", Toast.LENGTH_SHORT).show();
-                        }
-                        else {
-                            Toast.makeText(ActivityGirisSayfasi.this, "Mail gönderme hatası!", Toast.LENGTH_SHORT).show();
-                        }
-                    }
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(ActivityGirisSayfasi.this,"yeni parola", Toast.LENGTH_SHORT).show();
+                                }
+                                else {
+                                    Toast.makeText(ActivityGirisSayfasi.this, "Mail gönderme hatası!", Toast.LENGTH_SHORT).show();
+                                }
+                            }
                         });
             }
         }); }

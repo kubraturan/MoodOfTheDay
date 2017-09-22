@@ -67,7 +67,7 @@
                 android:padding="5dp"
                 android:hint="Mesajınız"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="102dp"
                 android:inputType="textMultiLine"
                 android:background="@android:color/transparent"/>
 

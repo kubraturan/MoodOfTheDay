@@ -5,6 +5,7 @@
         <item
             android:id="@+id/GotoProfile"
             android:icon="@drawable/ic_menu_camera"
+
             android:title="Profil" />
         <item
             android:id="@+id/Arkadaslar"

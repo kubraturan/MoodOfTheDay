@@ -1,7 +1,5 @@
 package com.example.developer.moodoftheday;
 
-import android.app.ActivityManager;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,14 +8,13 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ShareCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -25,7 +22,6 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -35,11 +31,8 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
@@ -147,6 +140,7 @@ public class ActivityModumSayfasi extends AppCompatActivity {
                         });
 
                 secimDialog.show();
+                Log.d("deneme","burdayim");
             }
         });
 
@@ -246,14 +240,13 @@ public class ActivityModumSayfasi extends AppCompatActivity {
         }); }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == resim) {
+        if (requestCode == resim && resultCode == RESULT_OK ) {
             image = data.getData();
             resEkle.setImageURI(image);
 
 
         } else if (requestCode == fotograf && resultCode == RESULT_OK) {
             Log.d("aaaa", String.valueOf(requestCode));
-
             image = data.getData();
             resEkle.setImageURI(image);
         }
@@ -274,7 +267,7 @@ public class ActivityModumSayfasi extends AppCompatActivity {
         window.setLayout(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         window.setGravity(Gravity.CENTER);
 
-        // builder.create().show();
+         builder.create().show();
         modList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

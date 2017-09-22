@@ -1,16 +1,15 @@
 package com.example.developer.moodoftheday;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.RadioButton;
-import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +26,7 @@ public class ActivityGizlilik extends AppCompatActivity {
     ListView gizlilikList;
     RadioButton radioButton;
     DatabaseReference refKisiFoto;
+    FirebaseUser user;
     Kisiler  al;
 
     @Override
@@ -34,10 +34,11 @@ public class ActivityGizlilik extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gizlilik);
 
-        Intent gelen=getIntent();
-        final   String gelenKisiIdsi=gelen.getExtras().getString("kisiIdsiGönder");
+       // Intent gelen=getIntent();
+        //final   String gelenKisiIdsi=gelen.getExtras().getString("kisiIdsiGönder");
+        user= FirebaseAuth.getInstance().getCurrentUser();
 
-        refKisiFoto = FirebaseDatabase.getInstance().getReference("users").child(gelenKisiIdsi);
+        refKisiFoto = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
 
 
 
@@ -54,28 +55,34 @@ public class ActivityGizlilik extends AppCompatActivity {
 
 
 
-
-
+//        Intent databaseDurum=getIntent();
+//        final String aaa=databaseDurum.getExtras().getString("kisiIdsiGönder");
+//
+//
 
         gizlilikList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                Intent don = new Intent(ActivityGizlilik.this, ActivityProfilSayfasi.class);
-                don.putExtra("gizlilik esası", gizlilik.get(position).getImage());
+               // Intent don = new Intent(ActivityGizlilik.this, ActivityProfilSayfasi.class);
+//                Log.d("deneme","hata");
+//               don.putExtra("gizlilik esası", "fake");
                 refKisiFoto.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         Map<String, Object> postValues = new HashMap<String,Object>();
+                        Log.d("deneme","hata");
+
                         for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                 postValues.put(postSnapshot.getKey(),postSnapshot.getValue());
-                 postValues.put("profilGizlilik",gizlilik.get(position).getDurum());
+                            postValues.put(postSnapshot.getKey(),postSnapshot.getValue());
+                            Log.d("deneme","hata");
+
+                            postValues.put("profilGizlilik",gizlilik.get(position).getDurum());
 
                             refKisiFoto.updateChildren(postValues);
 
-                            }
+                        }
 
 
-                        Toast.makeText(ActivityGizlilik.this , "Profil Gizliliği"+" "+gizlilik.get(position).getDurum().toString(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -83,7 +90,7 @@ public class ActivityGizlilik extends AppCompatActivity {
 
                     }
                 });
-                startActivity(don);
+               //startActivity(don);
 
 
             }  });

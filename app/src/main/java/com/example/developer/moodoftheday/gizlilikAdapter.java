@@ -3,21 +3,14 @@ package com.example.developer.moodoftheday;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.RadioButton;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +57,7 @@ public class gizlilikAdapter  extends BaseAdapter {
 
         final gizlilikClass gizli = gizlilik.get(position);
         durum.setText(gizli.getDurum());
-        image.setImageResource(gizli.getImage());
+       image.setImageResource(gizli.getImage());
       //  radioButton.setActivated(gizli.isRadioButton());
         return lineView;
 
