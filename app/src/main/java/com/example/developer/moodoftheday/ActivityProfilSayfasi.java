@@ -275,52 +275,47 @@ public class ActivityProfilSayfasi extends AppCompatActivity {
                 }
 
 
-//if(liste.size()==0){
-//    barProfile.setBackgroundResource(R.drawable.ovalbeyaz);
-//
-//
-//}
-//
-//                if( liste.get(0).getModAdi().equals("Kırmızı:Hareketli Canlı Hissediyorum")) {
-//                    barProfile.setBackgroundResource(R.drawable.ovalkirmizi);
-//
-//
-//                }
-//               else if( liste.get(0).getModAdi().equals("Gri:Bunalmış Hissediyorum"))
-//                {
-//                    barProfile.setBackgroundResource(R.drawable.ovalgri);}
-//
-//             else   if( liste.get(0).getModAdi().equals("Mavi:Sakin,Rahat ve Özgür Hissediyorum"))
-//                {
-//                    barProfile.setBackgroundResource(R.drawable.ovalmavi);}
-//                else   if( liste.get(0).getModAdi().equals("Kahverengi:Duygusal Hissediyorum"))
-//                {
-//                    barProfile.setBackgroundResource(R.drawable.ovalkahverengi);}
-//                else   if( liste.get(0).getModAdi().equals("Mor:Umutlu Hissediyorum"))
-//                {
-//                    barProfile.setBackgroundResource(R.drawable.ovalmor);}
-//                else   if( liste.get(0).getModAdi().equals("Pembe:Neşeli Hissediyorum"))
-//                {
-//                    barProfile.setBackgroundResource(R.drawable.ovalpembe);}
-//                else   if( liste.get(0).getModAdi().equals("Turuncu:Cesaretli ve Güven Dolu Hissediyorum"))
-//                {
-//                    barProfile.setBackgroundResource(R.drawable.ovalturuncu);}
-//                else   if( liste.get(0).getModAdi().equals("Yeşil:Huzurlu Hissediyorum"))
-//                {
-//                    barProfile.setBackgroundResource(R.drawable.ovalyesil);}
-//                else   if( liste.get(0).getModAdi().equals("Sarı:Hüzünlü ve Özlemiş Hissediyorum"))
-//                {
-//                    barProfile.setBackgroundResource(R.drawable.ovalsari);}
-//                else   if( liste.get(0).getModAdi().equals("Siyah:Üzgün ve Mutsuz Hissediyorum"))
-//                {
-//                    barProfile.setBackgroundResource(R.drawable.ovalsiyah);}
-//                else
-//                {
-//
-//
-//
-//                    barProfile.setBackgroundResource(R.drawable.ovalbeyaz);}
-//
+
+                if( liste.get(0).getModAdi().equals("Hareketli Canlı Hissediyorum")) {
+                    barProfile.setBackgroundResource(R.drawable.ovalkirmizi);
+
+
+                }
+               else if( liste.get(0).getModAdi().equals("Bunalmış Hissediyorum"))
+                {
+                    barProfile.setBackgroundResource(R.drawable.ovalgri);}
+
+             else   if( liste.get(0).getModAdi().equals("Sakin,Rahat ve Özgür Hissediyorum"))
+                {
+                    barProfile.setBackgroundResource(R.drawable.ovalmavi);}
+                else   if( liste.get(0).getModAdi().equals("Duygusal Hissediyorum"))
+                {
+                    barProfile.setBackgroundResource(R.drawable.ovalkahverengi);}
+                else   if( liste.get(0).getModAdi().equals("Umutlu Hissediyorum"))
+                {
+                    barProfile.setBackgroundResource(R.drawable.ovalmor);}
+                else   if( liste.get(0).getModAdi().equals("Neşeli Hissediyorum"))
+                {
+                    barProfile.setBackgroundResource(R.drawable.ovalpembe);}
+                else   if( liste.get(0).getModAdi().equals("Cesaretli ve Güven Dolu Hissediyorum"))
+                {
+                    barProfile.setBackgroundResource(R.drawable.ovalturuncu);}
+                else   if( liste.get(0).getModAdi().equals("Huzurlu Hissediyorum"))
+                {
+                    barProfile.setBackgroundResource(R.drawable.ovalyesil);}
+                else   if( liste.get(0).getModAdi().equals("Hüzünlü ve Özlemiş Hissediyorum"))
+                {
+                    barProfile.setBackgroundResource(R.drawable.ovalsari);}
+                else   if( liste.get(0).getModAdi().equals("Üzgün ve Mutsuz Hissediyorum"))
+                {
+                    barProfile.setBackgroundResource(R.drawable.ovalsiyah);}
+                else
+                {
+
+
+
+                    barProfile.setBackgroundResource(R.drawable.ovalbeyaz);}
+
 
 
                 recycler_view = (RecyclerView)findViewById(R.id.profildekiModlar);

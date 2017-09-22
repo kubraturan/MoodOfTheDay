@@ -173,8 +173,7 @@ public class ActivityModumSayfasi extends AppCompatActivity {
             public void onClick(View v) {
 
 
-
-                          if(image == null) {
+                            if(image == null) {
 
                               id = dbref.push().getKey();
                                 al = new modumProfil(modunDurumu.getText().toString(), sonDurum.getText().toString(),saat,tarih, profResmi);
@@ -275,7 +274,9 @@ public class ActivityModumSayfasi extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 dialog.hide();
                 ((ImageView) findViewById(R.id.modGosterge)).setImageResource(modlar.get(i).getModResmi());
-                modunDurumu.setText((modlar.get(i).getModAdi())+":"+modlar.get(i).getModDurumu());
+                //modlar.get(i).getModAdi())+":"+
+
+                modunDurumu.setText((modlar.get(i).getModDurumu()));
                 profResmi =  modlar.get(i).setModResmi(modlar.get(i).getModResmi());
             }
         });
