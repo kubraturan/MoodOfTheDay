@@ -160,6 +160,7 @@ public class ActivityModumSayfasi extends AppCompatActivity {
         });
         //todo:database ekleme işlemlerini yapalım
         modunDurumu = (TextView) findViewById(R.id.modunDurumu);
+        modunDurumu.setText("mod ekle");
         sonDurum = (EditText) findViewById(R.id.sonDurum);
         paylasilacakResim=(ImageView) findViewById(R.id.paylasilacakResim) ;
         intent=getIntent();
@@ -173,6 +174,7 @@ public class ActivityModumSayfasi extends AppCompatActivity {
             public void onClick(View v) {
 
 
+                if(!(modunDurumu.getText().toString()).equals("mod ekle")){
 
                           if(image == null) {
 
@@ -242,7 +244,9 @@ public class ActivityModumSayfasi extends AppCompatActivity {
 
                                         }
                                     });
-                                }
+                                }}else{
+                    Toast.makeText(ActivityModumSayfasi.this, "Lütfen Modunuzu Giriniz", Toast.LENGTH_SHORT).show();
+                }
 
 
 
