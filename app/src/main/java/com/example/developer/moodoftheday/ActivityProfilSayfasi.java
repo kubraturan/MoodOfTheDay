@@ -78,7 +78,6 @@ public class ActivityProfilSayfasi extends AppCompatActivity {
     FirebaseUser user;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -178,9 +177,22 @@ public class ActivityProfilSayfasi extends AppCompatActivity {
 
                             public void onClick(DialogInterface dialog, int which) {
 
-                                Intent profResm = new Intent(getApplicationContext(),profilResmi.class);
-                                profResm.putExtra("fakeRes","");
-                                startActivity(profResm);
+                                refKisiFoto.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        //Toast.makeText(ActivityProfilSayfasi.this, ""+dataSnapshot.child("kisiResmi").getValue().toString(), Toast.LENGTH_SHORT).show();
+                                        Intent profResm = new Intent(getApplicationContext(),profilResmi.class);
+                                        profResm.putExtra("fakeRes",dataSnapshot.child("kisiResmi").getValue().toString());
+                                        startActivity(profResm);
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+
+                                    }
+                                });
+
+
                             }
                         });
 
