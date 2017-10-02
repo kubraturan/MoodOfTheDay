@@ -3,8 +3,10 @@ package com.example.developer.moodoftheday;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
 
 public class profilResmi extends AppCompatActivity {
+    ImageView profil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -12,5 +14,7 @@ public class profilResmi extends AppCompatActivity {
         setContentView(R.layout.activity_profil_resmi);
         Intent fakeRes=getIntent();
      final String fakeRess=   fakeRes.getExtras().getString("fakeRes");
+        profil=(ImageView) findViewById(R.id.prof);
+        profil.setImageResource(Integer.valueOf(fakeRess));
     }
 }
