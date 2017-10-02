@@ -1,5 +1,6 @@
 package com.example.developer.moodoftheday;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -32,6 +33,8 @@ DatabaseReference arkadaslar,arkadasBilCek;
 
         user= FirebaseAuth.getInstance().getCurrentUser();
         Log.d("deneme","Burda");
+        Intent gelenFake=getIntent();
+        gelenFake.getStringExtra("ara");
 //        Intent gelecek=getIntent();
 //        final String gelecekKisi=   gelecek.getExtras().getString("kisiIdsi");
         arkadasList = (ListView) findViewById(R.id.arkadasListesi);

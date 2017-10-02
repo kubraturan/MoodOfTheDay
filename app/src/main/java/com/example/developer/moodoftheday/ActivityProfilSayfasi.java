@@ -118,8 +118,8 @@ public class ActivityProfilSayfasi extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
 
-           //Glide.with(getApplicationContext()).load(dataSnapshot.child("kisiResmi").getValue()).into(profilResmi);
-                profilResmi.setImageResource(Integer.parseInt(dataSnapshot.child("kisiResmi").getValue().toString()));
+           Glide.with(getApplicationContext()).load(dataSnapshot.child("kisiResmi").getValue()).into(profilResmi);
+             //   profilResmi.setImageResource(Integer.parseInt(dataSnapshot.child("kisiResmi").getValue().toString()));
                 isim.setText(dataSnapshot.child("name").getValue().toString());
                 memleket.setText(" ");
                 yas.setText(" ");
@@ -289,9 +289,12 @@ public class ActivityProfilSayfasi extends AppCompatActivity {
 
                 }
 
+                if(liste.size()>0)
 
-
-                if( liste.get(0).getModAdi().equals("Hareketli Canlı Hissediyorum")) {
+                if( liste.get(0).getModAdi().equals(null)) {
+                    barProfile.setBackgroundResource(R.drawable.ovalbeyaz);
+                }
+            else if( liste.get(0).getModAdi().equals("Hareketli Canlı Hissediyorum")) {
                     barProfile.setBackgroundResource(R.drawable.ovalkirmizi);
 
 
@@ -394,15 +397,13 @@ public class ActivityProfilSayfasi extends AppCompatActivity {
                                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                                     Kisiler gel=postSnapshot.getValue(Kisiler.class);
                                     gel.getProfilGizlilik();
-                                    Log.d("heyyo", gel.getProfilGizlilik());
+
                                     // postValues.add(postSnapshot.getValue().toString());
                                     post.add(gel);
-                                    Log.d("heyyo", gel.getProfilGizlilik());
 
                                  if(postSnapshot.getValue().toString().equals("Herkese Açık")){
                                      switch (item.getItemId()) {
                                          case R.id.herkes: {
-                                             Log.d("deneme", String.valueOf(item.getItemId()));
 
                                              item.setChecked(true);
                                          }
@@ -623,17 +624,17 @@ public class ActivityProfilSayfasi extends AppCompatActivity {
             imageUri = Uri.fromFile(f);
             profilResmi.setImageURI(imageUri);
             storageReference= FirebaseStorage.getInstance().getReference("profilResmi");
-            storageReference.child(imageUri.getLastPathSegment()).putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            final StorageTask<UploadTask.TaskSnapshot> taskSnapshotStorageTask =  storageReference.child(imageUri.getLastPathSegment()).putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
                     @SuppressWarnings("VisibleForTests")    String alll = taskSnapshot.getDownloadUrl().toString();
-                    id = refKisiFoto.push().getKey();
+                   // id = refKisiFoto.push().getKey();
                     res = new Kisiler(alll);
              //         paylasilacakResim.setVisibility(View.INVISIBLE);
 
-                   Glide.with(getApplicationContext()).load(alll).thumbnail(0.7f).into(profilResmi);
-                    refKisiFoto.child("kisiResmi").setValue(alll);
+                Glide.with(getApplicationContext()).load(alll).thumbnail(0.7f).into(profilResmi);
+                  //  refKisiFoto.child("kisiResmi").setValue(alll);
                     Toast.makeText(ActivityProfilSayfasi.this, "Upload Done", Toast.LENGTH_LONG).show();
 
                 }});
@@ -652,11 +653,11 @@ public class ActivityProfilSayfasi extends AppCompatActivity {
 
                     @SuppressWarnings("VisibleForTests") String alll = taskSnapshot.getDownloadUrl().toString();
 
-                    id = refKisiFoto.push().getKey();
+                 //   id = refKisiFoto.push().getKey();
                     res = new Kisiler(alll);
                     //  paylasilacakResim.setVisibility(View.INVISIBLE);
 
-                    refKisiFoto.child(id).setValue(res);
+                    refKisiFoto.child("kisiResmi").setValue(res);
 
                     Toast.makeText(ActivityProfilSayfasi.this, "Upload Done", Toast.LENGTH_LONG).show();
 
