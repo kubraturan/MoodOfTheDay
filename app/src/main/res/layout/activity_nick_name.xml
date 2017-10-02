@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.developer.moodoftheday.NickName">
+
+
+    <Button
+        android:id="@+id/basla"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="103dp"
+        android:layout_marginStart="103dp"
+        android:text="Sohbete Başla" />
+
+    <EditText
+        android:id="@+id/nick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginBottom="89dp"
+        android:layout_marginLeft="71dp"
+        android:layout_marginStart="71dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="NickName Giriniz"
+        android:layout_above="@+id/basla"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+</RelativeLayout>

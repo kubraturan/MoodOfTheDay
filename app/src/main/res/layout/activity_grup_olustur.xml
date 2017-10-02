@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+    tools:context="com.example.developer.moodoftheday.GrupOlustur">
+
+
+
+        <EditText
+            android:id="@+id/grupAdi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="Grup Adını Giriniz"
+            tools:layout_editor_absoluteY="0dp"
+            tools:layout_editor_absoluteX="8dp" />
+    <EditText
+        android:id="@+id/nickname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="NickName Giriniz"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp" />
+
+    <Button
+            android:id="@+id/kaydet"
+            android:layout_width="368dp"
+            android:layout_height="48dp"
+
+            android:layout_below="@+id/grupAdi"
+            android:layout_marginTop="103dp"
+            android:layout_toEndOf="@+id/grupAdi"
+            android:layout_toRightOf="@+id/grupAdi"
+            android:text="kaydet"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="match_parent" />
+
+        <Spinner
+            android:id="@+id/spinner2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteY="0dp"
+            tools:layout_editor_absoluteX="8dp" />
+
+    <Spinner
+        android:id="@+id/modSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
