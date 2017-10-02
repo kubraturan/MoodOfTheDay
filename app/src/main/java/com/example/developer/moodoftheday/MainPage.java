@@ -63,10 +63,11 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
                 for(DataSnapshot obj:dataSnapshot.getChildren()){
                     arkadaslar.add(obj.getKey());
 
-
                 }
                 for( int i=0;i<arkadaslar.size();i++){
-                    dbref = FirebaseDatabase.getInstance().getReference("kullaniciModlari").child(arkadaslar.get(i));
+                    dbref = FirebaseDatabase.getInstance().getReference("kullaniciModlari").child(arkadaslar.get(i).toString());
+
+
                     t=i;
                     dbref.addValueEventListener(new ValueEventListener() {
 
@@ -77,12 +78,13 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
                                 liste.add(customer);
 
 
+
                             }
 
                             LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
                             layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                             layoutManager.scrollToPosition(0);
-                            profilModAdapterr adapter_items = new profilModAdapterr(arkadaslar.get(t),liste,getApplicationContext(),new CustomItemClickListener(){
+                            profilModAdapterr adapter_items = new profilModAdapterr(arkadaslar.get(t).toString(),liste,getApplicationContext(),new CustomItemClickListener(){
                                 @Override
                                 public void onItemClick(View v, int position) {
 
@@ -225,6 +227,15 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
 
 
         }
+
+        if (id == R.id.sohbet) {
+
+            Intent sohbetegit=new Intent(getApplicationContext(),sohbetBaslangisSayfasi.class);
+            startActivity(sohbetegit);
+
+
+        }
+
 
 
 

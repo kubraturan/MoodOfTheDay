@@ -108,8 +108,8 @@ public class profilModAdapterr extends RecyclerView.Adapter<profilModAdapterr.Vi
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        //
-       // user=FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+         //user=FirebaseAuth.getInstance().getCurrentUser().getUid();
         //user=modDurumlarıList.get(position).getId();
 
         refKisiBil=FirebaseDatabase.getInstance().getReference("users");
@@ -121,7 +121,7 @@ public class profilModAdapterr extends RecyclerView.Adapter<profilModAdapterr.Vi
 
 
 
-               holder.kisiProfRes.setImageResource(Integer.valueOf(dataSnapshot.child("kisiResmi").getValue().toString()));
+                holder.kisiProfRes.setImageResource(Integer.valueOf(dataSnapshot.child("kisiResmi").getValue().toString()));
                 holder.KisiAdi.setText(dataSnapshot.child("name").getValue().toString());
 
             }

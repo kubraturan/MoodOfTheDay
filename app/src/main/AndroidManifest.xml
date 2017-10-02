@@ -55,7 +55,15 @@
         <activity android:name=".gizlilikAdapter" />
         <activity android:name=".ActivityTakip" />
         <activity android:name=".TakipAdapter" />
-        <activity android:name=".resimOlmazsaAdapter"></activity>
+        <activity android:name=".resimOlmazsaAdapter" />
+        <activity android:name=".sohbetBaslangisSayfasi" />
+        <activity android:name=".Gruplar" />
+        <activity android:name=".GrupOlustur" />
+        <activity android:name=".uckisisohbet" />
+        <activity android:name=".dortkisisohbet" />
+        <activity android:name=".beskisisohbet" />
+        <activity android:name=".altikisisohbet" />
+        <activity android:name=".NickName"></activity>
     </application>
 
 </manifest>
