@@ -120,8 +120,9 @@ public class profilModAdapterr extends RecyclerView.Adapter<profilModAdapterr.Vi
 
 
 
+                Glide.with(context).load(dataSnapshot.child("kisiResmi").getValue()).into(holder.kisiProfRes);
 
-                holder.kisiProfRes.setImageResource(Integer.valueOf(dataSnapshot.child("kisiResmi").getValue().toString()));
+              //  holder.kisiProfRes.setImageResource(Integer.valueOf(dataSnapshot.child("kisiResmi").getValue().toString()));
                 holder.KisiAdi.setText(dataSnapshot.child("name").getValue().toString());
 
             }

@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -39,6 +40,7 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
     DatabaseReference dbref;
     private RecyclerView recycler_view;
     FirebaseUser user;
+
 
     int t;
     @Override
@@ -154,7 +156,7 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                image.setImageResource(Integer.valueOf(dataSnapshot.child(alınan).child("kisiResmi").getValue().toString()));
+                Glide.with(getApplicationContext()).load(dataSnapshot.child(alınan).child("kisiResmi").getValue().toString()).into(image);
                 isim.setText(dataSnapshot.child(alınan).child("name").getValue().toString());
 
             }
@@ -165,15 +167,16 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
             }
         });
 
-  /*   takip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent git=new Intent(getApplicationContext(),ActivityTakip.class);
-                git.putExtra("kisiIdsi",alınan);
-                startActivity(git);
 
-            }
-        });*/
+//     takipIstegi.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent git=new Intent(getApplicationContext(),ActivityTakip.class);
+//                git.putExtra("kisiIdsi",alınan);
+//                startActivity(git);
+//
+//            }
+//        });
     }
 
     @Override
@@ -204,16 +207,22 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
             startActivity(aa);
 
         }  if (id == R.id.Arkadaslar) {
+            Intent Git=new Intent(MainPage.this,ActivityArkadasListesi.class);
+            Git.putExtra("ara","");
+            startActivity(Git);
 
-        }  if (id == R.id.Message) {
+        }
+      if (id == R.id.Message) {
             //TODO: Message PAge added
 
         }   if (id == R.id.share) {
             //TODO: Anahatlar belli olunca oluşturulacak
             // startActivity(new Intent(getApplicationContext(), ActivityAnaSayfa.class));
 
-        } if (id == R.id.nav_send) {
-            // startActivity(new Intent(getApplicationContext(), ActivityModumSayfasi.class));
+        } if (id == R.id.mod) {
+            Intent mod=new Intent(getApplicationContext(), ActivityModumSayfasi.class);
+
+            startActivity(mod);
 
         }  if (id == R.id.ara) {
             Intent ara=new Intent(getApplicationContext(), ActivityAra.class);

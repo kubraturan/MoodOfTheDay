@@ -33,18 +33,18 @@ DatabaseReference dbref,ArkadasListesi;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ara);
-        Log.d("deneme","geldi");
+
          Intent araFake=getIntent();
          araFake.getExtras().getString("ara");
 
-        Log.d("deneme","geldi");
+
        // search=(SearchView)findViewById(R.id.araKisileri);
         dbref = FirebaseDatabase.getInstance().getReference("users");
         ArkadasListesi=FirebaseDatabase.getInstance().getReference("ArkadasListesi");
         user = firebaseAuth.getInstance().getCurrentUser();
 
 
-        Log.d("deneme","geldi");
+
         dbref.addValueEventListener(new ValueEventListener() {
 
                                         @Override
@@ -66,16 +66,18 @@ DatabaseReference dbref,ArkadasListesi;
 //                                                Log.d("deneme","geldi");
 
                                                 kisi.add(ara);
+
                                             }
 
+                          kisi.remove(user.getUid());
 
 
-                                            Log.d("deneme","geldi");
+
                 araListe = (ListView) findViewById(R.id.araListe);
 
                 araAdapter adapter = new araAdapter(ActivityAra.this, kisi);
                 araListe.setAdapter(adapter);
-                                            Log.d("deneme","geldi");
+
 
                 araListe.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override

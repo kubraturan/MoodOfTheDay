@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+
 public class profilResmi extends AppCompatActivity {
     ImageView profil;
 
@@ -12,9 +14,9 @@ public class profilResmi extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profil_resmi);
-        Intent fakeRes=getIntent();
-     final String fakeRess=   fakeRes.getExtras().getString("fakeRes");
-        profil=(ImageView) findViewById(R.id.prof);
-        profil.setImageResource(Integer.valueOf(fakeRess));
+        Intent fakeRes = getIntent();
+        final String fakeRess = fakeRes.getExtras().getString("fakeRes");
+        profil = (ImageView) findViewById(R.id.prof);
+        Glide.with(getApplicationContext()).load(fakeRess).into(profil);
     }
 }

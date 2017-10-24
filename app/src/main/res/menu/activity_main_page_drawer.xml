@@ -18,7 +18,7 @@
             android:title="Message" />
 
         <item
-            android:id="@+id/nav_send"
+            android:id="@+id/mod"
             android:icon="@drawable/ic_menu_send"
             android:title="Modum" />
 
@@ -30,18 +30,15 @@
             android:id="@+id/sohbet"
             android:icon="@drawable/ic_chat_bubble_outline_black_24dp"
             android:title="Sohbete Başla" />
-        <item
-            android:id="@+id/Cikis"
-            android:icon="@drawable/ic_chat_bubble_outline_black_24dp"
-            android:title="Çıkış Yap" />
 
 
 
     </group>
 
 
-    <group
-        android:checkableBehavior="single">
+    <item android:title="">
+        <menu>
+            <group android:checkableBehavior="single">
         <item
             android:id="@+id/ayarlarGizlilik"
             android:icon="@drawable/ic_settings_black_24dp"
@@ -51,10 +48,18 @@
             android:icon="@drawable/ic_menu_share"
             android:title="Share" />
 
+          <item
+       android:id="@+id/Cikis"
+       android:icon="@drawable/ic_exit_to_app_black_24dp"
+       android:title="Çıkış Yap" />
 
 
-    </group>
+
+
+            </group>
 
 
 
+</menu>
+    </item>
 </menu>

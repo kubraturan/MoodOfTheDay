@@ -56,7 +56,7 @@ public class ActivityModumSayfasi extends AppCompatActivity {
     EditText sonDurum;
     TextView modunDurumu;
     String gelenData;
-    Intent intent;
+
     private static final int fotograf = 1;
     private static final int resim = 2;
     private Uri image;
@@ -163,8 +163,8 @@ public class ActivityModumSayfasi extends AppCompatActivity {
         modunDurumu.setText("mod ekle");
         sonDurum = (EditText) findViewById(R.id.sonDurum);
         paylasilacakResim=(ImageView) findViewById(R.id.paylasilacakResim) ;
-        intent=getIntent();
-        dbref= FirebaseDatabase.getInstance().getReference("kullaniciModlari").child(intent.getStringExtra("kisiReference"));
+        user=FirebaseAuth.getInstance().getCurrentUser();
+        dbref= FirebaseDatabase.getInstance().getReference("kullaniciModlari").child(user.getUid());
          tarih= String.valueOf(mcurrentTime.get(Calendar.DAY_OF_MONTH))+"."+String.valueOf(mcurrentTime.get(Calendar.MONTH))+"."+String.valueOf(mcurrentTime.get(Calendar.YEAR));
          saat= String.valueOf(mcurrentTime.get(Calendar.HOUR_OF_DAY))+":"+String.valueOf( mcurrentTime.get(Calendar.MINUTE));
 
@@ -172,8 +172,6 @@ public class ActivityModumSayfasi extends AppCompatActivity {
         paylas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
 
 
 
@@ -251,7 +249,6 @@ public class ActivityModumSayfasi extends AppCompatActivity {
                                 }}else{
                     Toast.makeText(ActivityModumSayfasi.this, "Lütfen Modunuzu Giriniz", Toast.LENGTH_SHORT).show();
                 }
-
 
 
                 }
