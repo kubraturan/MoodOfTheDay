@@ -160,6 +160,8 @@ public class profilModAdapterr extends RecyclerView.Adapter<profilModAdapterr.Vi
     public int getItemCount() {
         return modDurumlarıList.size();
     }
+
+
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
